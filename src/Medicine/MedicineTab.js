@@ -2,14 +2,14 @@ import React, {Component} from 'react';
 import {Input, Container, Header, Menu, Button, Segment, Table, Pagination} from 'semantic-ui-react';
 
 
-class PatientTab extends Component{
+class MedicineTab extends Component{
     render(){
         return(
             <div>
 
                 <Container>
                     <Container textAlign="center">
-                        <Header>Patient's Tab</Header>
+                        <Header>Medicine's Tab</Header>
                         <Input icon="search" placeholder="Search"></Input>
 
                     </Container>
@@ -18,8 +18,8 @@ class PatientTab extends Component{
                     <Container>
                         <Segment attached="bottom">
                             <Menu.Item>
-                                <Button color="blue">Add Patient</Button>
-                                <Button color="green">Parse Patient CSV</Button>
+                                <Button color="blue">Add Medicine</Button>
+                                <Button color="green">Parse Medicine CSV</Button>
                             </Menu.Item>
 
                             <Table celled>
@@ -27,19 +27,19 @@ class PatientTab extends Component{
                                 <Table.Header>
                                     <Table.Row>
                                         <Table.HeaderCell>
-                                            Patient Number
+                                            Medicine ID
                                         </Table.HeaderCell>
 
                                         <Table.HeaderCell>
-                                            Last Name
+                                            Generic Name
                                         </Table.HeaderCell>
 
                                         <Table.HeaderCell>
-                                            First Name
+                                            Brand Name
                                         </Table.HeaderCell>
 
                                         <Table.HeaderCell>
-                                            Middle Name
+                                            Quantity
                                         </Table.HeaderCell>
 
                                         <Table.HeaderCell>
@@ -51,24 +51,24 @@ class PatientTab extends Component{
                                 <Table.Body>
                                     <Table.Row>
                                         <Table.Cell>
-                                            201431213
+                                            8754
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Bardiano
+                                            Paracetamol
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Alec
+                                            Biogesic
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Berueda
+                                            121
                                         </Table.Cell>
 
                                         <Table.Cell>
                                             <Button positive>
-                                                View
+                                                Edit
                                             </Button>
 
                                             <Button negative>
@@ -79,24 +79,24 @@ class PatientTab extends Component{
 
                                     <Table.Row>
                                         <Table.Cell>
-                                            201248268
+                                            2012
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Leonardo
+                                            Ibuprufen
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Isaiah Earvin Michael
+                                            Alaxan
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Valentin
+                                            889
                                         </Table.Cell>
 
                                         <Table.Cell>
                                             <Button positive>
-                                                View
+                                                Edit
                                             </Button>
 
                                             <Button negative>
@@ -107,24 +107,24 @@ class PatientTab extends Component{
 
                                     <Table.Row>
                                         <Table.Cell>
-                                            201451041
+                                            7411
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Salvador
+                                            Carbocisteine
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Katrina Anne
+                                            Solmux
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Nuguid
+                                            323
                                         </Table.Cell>
 
                                         <Table.Cell>
                                             <Button positive>
-                                                View
+                                                Edit
                                             </Button>
 
                                             <Button negative>
@@ -135,24 +135,24 @@ class PatientTab extends Component{
 
                                     <Table.Row>
                                         <Table.Cell>
-                                            201446313
+                                            4631
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Mendoza
+                                            Ibuprufen
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Seanod
+                                            Advil
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Paras
+                                            781
                                         </Table.Cell>
 
                                         <Table.Cell>
                                             <Button positive>
-                                                View
+                                                Edit
                                             </Button>
 
                                             <Button negative>
@@ -180,4 +180,4 @@ class PatientTab extends Component{
     }
 }
 
-export default PatientTab;
+export default MedicineTab;

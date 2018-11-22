@@ -24,8 +24,6 @@ class PatientCollection extends Component{
         
         return(
             <Accordion fluid styled>
-
-            
                 <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
                     <Icon name="dropdown"></Icon>Prescription History
                 </Accordion.Title>
