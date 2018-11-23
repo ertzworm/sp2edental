@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Layout from './Constants/Layout';
-import LandingPage from './SamplePage.js';
+import LandingPage from './Paths.js';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<LandingPage />, document.getElementById('root'));

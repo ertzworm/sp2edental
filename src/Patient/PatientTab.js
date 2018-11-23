@@ -10,7 +10,7 @@ class PatientTab extends Component{
 
                 <Container>
                     <Container textAlign="center">
-                        <Header>Patient's Tab</Header>
+                        <Header>Patients' Tab</Header>
                         <Input icon="search" placeholder="Search"></Input>
 
                     </Container>
@@ -68,9 +68,9 @@ class PatientTab extends Component{
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            <Button positive>
-                                                <Link to="/tabs/patients/alec/">View</Link>
-                                            </Button>
+                                            <Link to="/tabs/patients/alec" className="ui button positive">
+                                                View                                            
+                                            </Link>
 
                                             <Button negative>
                                                 Delete

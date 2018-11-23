@@ -15,7 +15,6 @@ import PatientProfileLayout from '../Patient/PatientProfileLayout';
 
 class Layout extends Component{
     
-    
     render(){
         return(
             <div>

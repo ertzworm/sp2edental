@@ -9,7 +9,7 @@ class MedicineTab extends Component{
 
                 <Container>
                     <Container textAlign="center">
-                        <Header>Medicine's Tab</Header>
+                        <Header>Medicines' Tab</Header>
                         <Input icon="search" placeholder="Search"></Input>
 
                     </Container>
