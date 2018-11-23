@@ -3,7 +3,7 @@ import {Button, Header, Container, Image, Card, Grid, GridColumn} from 'semantic
 import PatientCollection from './PatientCollection';
 import matthew from '../images/matthew.png';
 
-class Nav extends Component{
+class PatientProfile extends Component{
     render(){
         return(
             <div>
@@ -26,8 +26,9 @@ class Nav extends Component{
 
 							<Card.Content extra inline>
 								<Container inline>
-									<Button size="tiny">View Information</Button>
-									<Button size="tiny">Edit Information</Button>
+									<Button size="tiny">View </Button>
+									<Button size="tiny">Edit </Button>
+									<Button size="tiny" negative>X </Button>
 								</Container>
 							</Card.Content>
 						</Card>
@@ -42,4 +43,4 @@ class Nav extends Component{
     }
 }
 
-export default Nav;
+export default PatientProfile	;

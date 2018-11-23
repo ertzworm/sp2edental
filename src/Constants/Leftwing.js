@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import {Menu, Input, Image, Label} from 'semantic-ui-react';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import Layout from '../Constants/Layout.js';
+import PatientTab from '../Patient/PatientTab.js';
+
 import image from '../images/square-image.png';
 import daniel from '../images/daniel.jpg';
 
@@ -34,10 +38,17 @@ class Leftwing extends Component{
                 <Menu.Item>
                     Home
                     <Menu.Menu>
+                        <Link to="/tabs/patients/">
+                            <Menu.Item name="patients" active={activeItem == 'patients'} onClick={this.handleItemClick}>Patients</Menu.Item>
+                        </Link>
+
+                        <Link to="/tabs/medicines/">
+                            <Menu.Item name="medicines" active={activeItem == 'medicines'} onClick={this.handleItemClick}>Medicines</Menu.Item>
+                        </Link>
                         
-                        <Menu.Item name="patients" active={activeItem == 'patients'} onClick={this.handleItemClick}>Patients</Menu.Item>
-                        <Menu.Item name="pedicines" active={activeItem == 'medicines'} onClick={this.handleItemClick}>Medicines</Menu.Item>
-                        <Menu.Item name="procedures" active={activeItem == 'procedures'} onClick={this.handleItemClick}>Procedures</Menu.Item>
+                        <Link to="/tabs/procedures/">
+                            <Menu.Item name="procedures" active={activeItem == 'procedures'} onClick={this.handleItemClick}>Procedures</Menu.Item>
+                        </Link>
                     </Menu.Menu>
                 </Menu.Item>
 
@@ -46,7 +57,11 @@ class Leftwing extends Component{
                     <Menu.Menu>
                         
                         <Menu.Item name="profile" active={activeItem == 'profile'} onClick={this.handleItemClick}>Profile</Menu.Item>
-                        <Menu.Item name="verify" active={activeItem == 'verify'} onClick={this.handleItemClick}>System Accounts</Menu.Item>
+
+                        <Link to="/account/">
+                            <Menu.Item name="verify" active={activeItem == 'verify'} onClick={this.handleItemClick}>System Accounts</Menu.Item>
+                        </Link>
+                        
                         
                     </Menu.Menu>
                 </Menu.Item>

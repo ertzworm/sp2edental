@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Input, Container, Header, Menu, Button, Segment, Table, Pagination} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 
 
 class PatientTab extends Component{
@@ -68,7 +69,7 @@ class PatientTab extends Component{
 
                                         <Table.Cell>
                                             <Button positive>
-                                                View
+                                                <Link to="/tabs/patients/alec/">View</Link>
                                             </Button>
 
                                             <Button negative>

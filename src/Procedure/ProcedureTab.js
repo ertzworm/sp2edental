@@ -27,19 +27,19 @@ class ProcedureTab extends Component{
                                 <Table.Header>
                                     <Table.Row>
                                         <Table.HeaderCell>
-                                            Medicine ID
+                                            Procedure ID
                                         </Table.HeaderCell>
 
                                         <Table.HeaderCell>
-                                            Generic Name
+                                            Procedure
                                         </Table.HeaderCell>
 
                                         <Table.HeaderCell>
-                                            Brand Name
+                                            Description
                                         </Table.HeaderCell>
 
                                         <Table.HeaderCell>
-                                            Quantity
+                                            Price
                                         </Table.HeaderCell>
 
                                         <Table.HeaderCell>
@@ -51,47 +51,19 @@ class ProcedureTab extends Component{
                                 <Table.Body>
                                     <Table.Row>
                                         <Table.Cell>
-                                            8754
+                                            0021
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Paracetamol
+                                            Tooth Extraction
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Biogesic
+                                            Dentist removes specified tooth
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            121
-                                        </Table.Cell>
-
-                                        <Table.Cell>
-                                            <Button positive>
-                                                Edit
-                                            </Button>
-
-                                            <Button negative>
-                                                Delete
-                                            </Button>
-                                        </Table.Cell>
-                                    </Table.Row>
-
-                                    <Table.Row>
-                                        <Table.Cell>
-                                            2012
-                                        </Table.Cell>
-
-                                        <Table.Cell>
-                                            Ibuprufen
-                                        </Table.Cell>
-
-                                        <Table.Cell>
-                                            Alaxan
-                                        </Table.Cell>
-
-                                        <Table.Cell>
-                                            889
+                                            400
                                         </Table.Cell>
 
                                         <Table.Cell>
@@ -107,19 +79,47 @@ class ProcedureTab extends Component{
 
                                     <Table.Row>
                                         <Table.Cell>
-                                            7411
+                                            1234
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Carbocisteine
+                                            Cleansing
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Solmux
+                                            Sanitizes teeth
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            323
+                                            100
+                                        </Table.Cell>
+
+                                        <Table.Cell>
+                                            <Button positive>
+                                                Edit
+                                            </Button>
+
+                                            <Button negative>
+                                                Delete
+                                            </Button>
+                                        </Table.Cell>
+                                    </Table.Row>
+
+                                    <Table.Row>
+                                        <Table.Cell>
+                                            7866
+                                        </Table.Cell>
+
+                                        <Table.Cell>
+                                            Bracing
+                                        </Table.Cell>
+
+                                        <Table.Cell>
+                                            Adds foundation to teeth
+                                        </Table.Cell>
+
+                                        <Table.Cell>
+                                            20000
                                         </Table.Cell>
 
                                         <Table.Cell>
@@ -139,15 +139,15 @@ class ProcedureTab extends Component{
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Ibuprufen
+                                            Filling
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            Advil
+                                            Adds fillings to tooth
                                         </Table.Cell>
 
                                         <Table.Cell>
-                                            781
+                                            400
                                         </Table.Cell>
 
                                         <Table.Cell>

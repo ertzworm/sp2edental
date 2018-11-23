@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Layout from './Constants/Layout';
+import LandingPage from './SamplePage.js';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Layout />, document.getElementById('root'));
+ReactDOM.render(<LandingPage />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
