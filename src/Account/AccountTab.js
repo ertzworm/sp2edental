@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {Input, Container, Header, Icon, Accordion, Card, Image, Button} from 'semantic-ui-react';
+
+import DeleteModal from '../Constants/DeleteModal';
+
 import matthew from '../images/matthew.png';
 import elliot from '../images/elliot.jpg';
 import daniel from '../images/daniel.jpg';

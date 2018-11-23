@@ -56,8 +56,9 @@ class Leftwing extends Component{
                     Manage
                     <Menu.Menu>
                         
-                        <Menu.Item name="profile" active={activeItem == 'profile'} onClick={this.handleItemClick}>Profile</Menu.Item>
-
+                        <Link to="/account/profile/">
+                            <Menu.Item name="profile" active={activeItem == 'profile'} onClick={this.handleItemClick}>Profile</Menu.Item>
+                        </Link>
                         <Link to="/account/">
                             <Menu.Item name="verify" active={activeItem == 'verify'} onClick={this.handleItemClick}>System Accounts</Menu.Item>
                         </Link>

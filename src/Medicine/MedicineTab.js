@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Input, Container, Header, Menu, Button, Segment, Table, Pagination} from 'semantic-ui-react';
 
+import AddMedicine from './AddMedicine';
+
 
 class MedicineTab extends Component{
     render(){
@@ -18,7 +20,7 @@ class MedicineTab extends Component{
                     <Container>
                         <Segment attached="bottom">
                             <Menu.Item>
-                                <Button color="blue">Add Medicine</Button>
+                                <AddMedicine></AddMedicine>
                                 <Button color="green">Parse Medicine CSV</Button>
                             </Menu.Item>
 

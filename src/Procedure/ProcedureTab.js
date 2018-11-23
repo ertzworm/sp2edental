@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Input, Container, Header, Menu, Button, Segment, Table, Pagination} from 'semantic-ui-react';
-
+import AddProcedure from './AddProcedure';
 
 class ProcedureTab extends Component{
     render(){
@@ -18,7 +18,7 @@ class ProcedureTab extends Component{
                     <Container>
                         <Segment attached="bottom">
                             <Menu.Item>
-                                <Button color="blue">Add Procedure</Button>
+                                <AddProcedure></AddProcedure>
                                 <Button color="green">Parse Procedure CSV</Button>
                             </Menu.Item>
 

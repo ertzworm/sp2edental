@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {Input, Container, Header, Menu, Button, Segment, Table, Pagination} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
+import AddPatient from './AddPatient';
+import DeleteModal from '../Constants/DeleteModal.js';
+
+
 
 class PatientTab extends Component{
     render(){
@@ -19,7 +23,7 @@ class PatientTab extends Component{
                     <Container>
                         <Segment attached="bottom">
                             <Menu.Item>
-                                <Button color="blue">Add Patient</Button>
+                                <AddPatient></AddPatient>
                                 <Button color="green">Parse Patient CSV</Button>
                             </Menu.Item>
 
@@ -67,14 +71,14 @@ class PatientTab extends Component{
                                             Berueda
                                         </Table.Cell>
 
-                                        <Table.Cell>
+                                        <Table.Cell inline>
                                             <Link to="/tabs/patients/alec" className="ui button positive">
                                                 View                                            
                                             </Link>
 
-                                            <Button negative>
-                                                Delete
-                                            </Button>
+                                            <DeleteModal>
+
+                                            </DeleteModal>
                                         </Table.Cell>
                                     </Table.Row>
 
