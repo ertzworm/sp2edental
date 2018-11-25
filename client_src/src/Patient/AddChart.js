@@ -14,10 +14,11 @@ let fromPatient;
 
 
 class AddChart extends Component{
+
     constructor(props){
         super(props);
         this.state = {
-            open: false,
+            open: true,
             condition: 0,
             size: "fullscreen",
             color: 'blue',
@@ -27,8 +28,11 @@ class AddChart extends Component{
             lowerteeth: [
                 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
             ],
+            patientId: '',
+            date: '',
         }
-        console.log(this.state.patient);
+        
+        this.onAdd = this.onAdd.bind(this);
     }
 
 
@@ -81,18 +85,19 @@ class AddChart extends Component{
         const newChart = {
             upperteeth: this.state.upperteeth,
             lowerteeth: this.state.lowerteeth,
+            date: Date.now(),
             patientId: fromPatient
         }
 
         console.log(newChart);
 
-        // axios.request({
-        //     method: "post",
-        //     url: "http://localhost:3001/api/charts/" ,
-        //     data: newChart
-        // }).then(response => {
-        //     this.props.history.push("/tabs/patients/");
-        // })
+        axios.request({
+            method: "post",
+            url: "http://localhost:3001/api/charts/" ,
+            data: newChart
+        }).then(response => {
+            this.props.history.push("/tabs/patients/");
+        })
     }
 
     
@@ -109,10 +114,6 @@ class AddChart extends Component{
         return(
             
             <div>
-            
-
-            <Button onClick={this.show('fullscreen')} positive>Add Chart</Button>
-            <Button onClick={this.showSomething} negative>Log Patient ID</Button>
 
             <Modal size={size} dimmer={dimmer} open={open} onClose={this.close}>
                     <Modal.Header>Add Chart</Modal.Header>

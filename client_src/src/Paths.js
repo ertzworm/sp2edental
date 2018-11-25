@@ -23,6 +23,8 @@ import AddConsultation from './Patient/AddConsultation';
 
 //Charts
 import AddChart from './Patient/AddChart';
+import ViewChart from './Patient/ViewChart';
+import DeleteChart from './Patient/DeleteChart';
 
 //Medicine Components
 import MedicineLayout from './Medicine/MedicineLayout.js';
@@ -60,7 +62,11 @@ class LandingPage extends Component{
                         {/* Consultations */}
                         <Route path="/tabs/consultations/:id" exact component={DeleteConsultation}></Route>
                         <Route path="/tabs/consultations/add/:id" exact component={AddConsultation}></Route>
+                        
+                        {/* Charts */}
+                        <Route path="/tabs/charts/view/:id" exact component={ViewChart}></Route>
                         <Route path="/tabs/charts/add/:id" exact component={AddChart}></Route>
+                        <Route path="/tabs/charts/delete/:id" exact component={DeleteChart}></Route>
 
 
                         {/* Medicines */}

@@ -24,6 +24,7 @@ class AddConsultation extends Component{
     onAdd(){
         
         fromPatient = this.props.match.params.id
+        
         const newConsultation = {
             date: this.state.date,
             price: parseInt( this.state.price, 10),

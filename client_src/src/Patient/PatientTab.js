@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Input, Container, Header, Menu, Button, Segment, Table, Pagination} from 'semantic-ui-react';
+import {Input, Container, Header, Menu, Dropdown, Segment, Table, Pagination} from 'semantic-ui-react';
 import axios from 'axios';
 
 import ViewLink from './ViewLink';
@@ -7,6 +7,8 @@ import AddLink from './AddLink';
 import EditLink from './EditLink';
 import DeleteLink from './DeleteLink';
 import PatientCSVRead from './PatientCSVRead';
+
+import AddChartsLink from './AddChartLink';
 
 import AddConsultationLink from './AddConsultationLink';
 
@@ -72,9 +74,19 @@ class PatientTab extends Component{
                             Edit
                         </EditLink>
 
-                        <AddConsultationLink item={patient}>
-                            Add Consultation
-                        </AddConsultationLink>
+                        <Dropdown text="Add Interactions" pointing="left" className="link item button">
+                            <Dropdown.Menu>
+                                <Dropdown.Item>
+                                    <AddConsultationLink item={patient}></AddConsultationLink>
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    <AddChartsLink item={patient}></AddChartsLink>
+                                </Dropdown.Item>
+                                <Dropdown.Item>Add Images</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                        
 
                         <DeleteLink item={patient}>
                             Delete

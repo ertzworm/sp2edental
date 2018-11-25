@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Input, Container, Header, Menu, Button, Segment, Table, Pagination} from 'semantic-ui-react';
+import {Input, Container, Header, Menu, Dropdown, Segment, Table, Pagination} from 'semantic-ui-react';
 
 
 import AddLink from './AddLink';
@@ -65,6 +65,8 @@ class ProcedureTab extends Component{
                     <Table.Cell>{procedure.description}</Table.Cell>
                     <Table.Cell>{procedure.price}</Table.Cell>
                     <Table.Cell>
+
+                        
                         <EditLink item={procedure}>
                             Edit
                         </EditLink>

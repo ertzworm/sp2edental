@@ -6,18 +6,20 @@ import {Accordion, Icon} from 'semantic-ui-react';
 
 import PrescriptionHistoryTable from './PrescriptionHistoryTable';
 import DentalImages from './DentalImages';
-import DentalCharts from './DentalCharts';
+
 
 import DeleteConsultationLink from './DeleteConsultationLink'
-import AddChartLink from './AddChartLink';
 import AddChart from './AddChart';
+
+import ViewChartLink from './ViewChartLink';
+import DeleteChartLink from './DeleteChartLink';
 
 import matthew from '../images/matthew.png';
 
 import axios from 'axios';
 
 let consultationTable;
-
+let chartsTable;
 
 class PatientProfileLayout extends Component{
 
@@ -36,16 +38,19 @@ class PatientProfileLayout extends Component{
             address: '',
             contactNumber: '',
             consultations: [],
+            charts: [],
             patient: '',
         }
 
         this.getPatient = this.getPatient.bind(this);
-        this.getConsultation = this.getConsultation.bind(this);
+        this.getConsultations = this.getConsultations.bind(this);
+        this.getCharts = this.getCharts.bind(this);
     }
 
     componentWillMount(){
         this.getPatient();
-        this.getConsultation();
+        this.getConsultations();
+        this.getCharts();
     }
 
     handleClick = (e, titleProps) => {
@@ -76,11 +81,20 @@ class PatientProfileLayout extends Component{
         
     }
     
-    getConsultation(){
+    getConsultations(){
         let patientId = this.props.match.params.id;
         axios.get("http://localhost:3001/api/patients/" + patientId + "/consultations").then( response =>
             this.setState({
                 consultations: response.data
+            })
+        )
+    }
+
+    getCharts(){
+        let patientId = this.props.match.params.id;
+        axios.get("http://localhost:3001/api/patients/" + patientId + "/charts").then( response =>
+            this.setState({
+                charts: response.data
             })
         )
     }
@@ -90,6 +104,7 @@ class PatientProfileLayout extends Component{
         const {activeIndex} = this.state;
         const consultations = this.state.consultations;
         const {patient} = this.state;
+        const {charts} = this.state;
 
         consultationTable  = consultations.map(consultation =>{
             
@@ -108,6 +123,28 @@ class PatientProfileLayout extends Component{
                     </Table.Cell>
                 </Table.Row>
             );
+        })
+
+        chartsTable = charts.map(chart => {
+            return(
+                <Table.Row key={chart.id}>
+                    <Table.Cell>{chart.id}</Table.Cell>
+                    <Table.Cell>
+                        <ViewChartLink item={chart}>
+                            View Chart
+                        </ViewChartLink>
+                    </Table.Cell>
+                    <Table.Cell>{chart.date}</Table.Cell>
+                    <Table.Cell>
+
+                        
+
+                        <DeleteChartLink item={chart}>
+                            Delete Chart
+                        </DeleteChartLink>    
+                    </Table.Cell>
+                </Table.Row>
+            )
         })
 
         return(
@@ -181,12 +218,38 @@ class PatientProfileLayout extends Component{
 
                             <Accordion.Content active={activeIndex === 3}>
                                 <h3> {patient.id}</h3>
-                                <AddChartLink item={patient}>
-                                    
-                                    </AddChartLink>
-                                <DentalCharts>
+                                
 
-                                </DentalCharts>
+                                <Table celled>
+                                    <Table.Header>
+                                        <Table.Row>
+                                            <Table.HeaderCell>
+                                                Chart Number
+                                            </Table.HeaderCell>
+
+                                            <Table.HeaderCell>
+                                                Chart
+                                            </Table.HeaderCell>
+
+                                            <Table.HeaderCell>
+                                                Date Procured
+                                            </Table.HeaderCell>
+
+                                            <Table.HeaderCell>
+                                                Actions
+                                            </Table.HeaderCell>
+                                        </Table.Row>
+                                    </Table.Header>
+
+                                    <Table.Body>
+                                        
+                                        {chartsTable}
+                                        
+                                    </Table.Body>
+                                </Table>
+
+                                
+                                
                             </Accordion.Content>
 
                             <Accordion.Title active={activeIndex === 4} index={4} onClick={this.handleClick}>
