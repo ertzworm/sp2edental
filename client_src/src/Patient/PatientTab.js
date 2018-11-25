@@ -6,6 +6,7 @@ import ViewLink from './ViewLink';
 import AddLink from './AddLink';
 import EditLink from './EditLink';
 import DeleteLink from './DeleteLink';
+import PatientCSVRead from './PatientCSVRead';
 
 import AddConsultationLink from './AddConsultationLink';
 
@@ -101,7 +102,7 @@ class PatientTab extends Component{
                         <Segment attached="bottom">
                             <Menu.Item>
                                 <AddLink></AddLink>
-                                <Button color="green">Parse Patient CSV</Button>
+                                <PatientCSVRead></PatientCSVRead>
                             </Menu.Item>
 
                             <Table celled>
