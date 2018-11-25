@@ -12,8 +12,6 @@ class DeleteLink extends Component{
 
 
     render(){
-
-        console.log("Delete passed id:" +this.props.item.id);
         return(
             <span>
                 <Link className="ui button red" to={"/tabs/patients/delete/" +this.props.item.id}>

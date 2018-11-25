@@ -26,8 +26,9 @@ class AddChart extends Component{
             ],
             lowerteeth: [
                 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-            ]
+            ],
         }
+        console.log(this.state.patient);
     }
 
 
@@ -74,8 +75,8 @@ class AddChart extends Component{
 
       onAdd(){
         
-        //console.log("This props: " +this.props.patient.id);
-        //fromPatient = this.props.item.id
+        fromPatient = this.props.match.params.id;
+        console.log(fromPatient);
         
         const newChart = {
             upperteeth: this.state.upperteeth,
@@ -93,6 +94,7 @@ class AddChart extends Component{
         //     this.props.history.push("/tabs/patients/");
         // })
     }
+
     
 
     show = size => () => this.setState({ size, open: true })
@@ -110,6 +112,7 @@ class AddChart extends Component{
             
 
             <Button onClick={this.show('fullscreen')} positive>Add Chart</Button>
+            <Button onClick={this.showSomething} negative>Log Patient ID</Button>
 
             <Modal size={size} dimmer={dimmer} open={open} onClose={this.close}>
                     <Modal.Header>Add Chart</Modal.Header>

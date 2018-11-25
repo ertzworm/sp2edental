@@ -47,7 +47,6 @@ class DeleteConsultation extends Component{
             )
         )
 
-        console.log("Hi");
         console.log(this.state.patientId);
     }
 

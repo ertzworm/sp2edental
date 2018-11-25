@@ -90,7 +90,6 @@ class PatientProfileLayout extends Component{
         const {activeIndex} = this.state;
         const consultations = this.state.consultations;
         const {patient} = this.state;
-        console.log("From Params: " +patient);
 
         consultationTable  = consultations.map(consultation =>{
             
@@ -182,9 +181,9 @@ class PatientProfileLayout extends Component{
 
                             <Accordion.Content active={activeIndex === 3}>
                                 <h3> {patient.id}</h3>
-                                <AddChart patient={patient}>
+                                <AddChartLink item={patient}>
                                     
-                                    </AddChart>
+                                    </AddChartLink>
                                 <DentalCharts>
 
                                 </DentalCharts>

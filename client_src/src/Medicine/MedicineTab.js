@@ -5,6 +5,8 @@ import AddLink from './AddLink';
 import EditLink from './EditLink';
 import DeleteLink from './DeleteLink';
 
+import MedicineCSVRead from './MedicineCSVRead';
+
 import axios from 'axios';
 
 const getMedicineQuery = "http://localhost:3001/api/Medicines";
@@ -92,7 +94,8 @@ class MedicineTab extends Component{
                                 <AddLink>
                                     Add
                                 </AddLink>
-                                <Button color="green">Parse Medicine CSV</Button>
+                                <MedicineCSVRead></MedicineCSVRead>
+                                
                             </Menu.Item>
 
                             <Table celled>
