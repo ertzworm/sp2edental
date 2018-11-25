@@ -1,18 +1,234 @@
 import React, {Component} from 'react';
 import Nav from '../Constants/Nav.js';
-import PatientProfile from './PatientProfile.js';
+import {Header, Container, Image, Card, Grid, Table} from 'semantic-ui-react';
+import {Accordion, Icon} from 'semantic-ui-react';
+
+
+import PrescriptionHistoryTable from './PrescriptionHistoryTable';
+import DentalImages from './DentalImages';
+import DentalCharts from './DentalCharts';
+
+import DeleteConsultationLink from './DeleteConsultationLink'
+import AddChartLink from './AddChartLink';
+import AddChart from './AddChart';
+
+import matthew from '../images/matthew.png';
+
+import axios from 'axios';
+
+let consultationTable;
+
 
 class PatientProfileLayout extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            item: this.props.item,
+            activeIndex: 0,
+            firstName: '',
+            middleName: '',
+            lastName: '',
+            age: 0,
+            sex: '',
+            civilStatus: '',
+            occupation: '',
+            address: '',
+            contactNumber: '',
+            consultations: [],
+            patient: '',
+        }
+
+        this.getPatient = this.getPatient.bind(this);
+        this.getConsultation = this.getConsultation.bind(this);
+    }
+
+    componentWillMount(){
+        this.getPatient();
+        this.getConsultation();
+    }
+
+    handleClick = (e, titleProps) => {
+        const {index} = titleProps
+        const {activeIndex} = this.state
+        const newIndex = activeIndex === index ? -1 : index
+        this.setState({ activeIndex: newIndex })
+    }
+
+    getPatient(){
+		let patientId = this.props.match.params.id;
+        axios.get("http://localhost:3001/api/patients/" + patientId).then( response =>
+            this.setState({
+                id: response.data.id,
+                firstName: response.data.firstName,
+                middleName: response.data.middleName,
+                lastName: response.data.lastName,
+                age: response.data.age,
+                sex: response.data.sex,
+                civilStatus: response.data.civilStatus,
+                occupation: response.data.occupation,
+                address: response.data.address,
+                contactNumber: response.data.contactNumber,
+                patient: response.data
+            })
+        )
+
+        
+    }
+    
+    getConsultation(){
+        let patientId = this.props.match.params.id;
+        axios.get("http://localhost:3001/api/patients/" + patientId + "/consultations").then( response =>
+            this.setState({
+                consultations: response.data
+            })
+        )
+    }
+
     render(){
+        
+        const {activeIndex} = this.state;
+        const consultations = this.state.consultations;
+        const {patient} = this.state;
+        console.log("From Params: " +patient);
+
+        consultationTable  = consultations.map(consultation =>{
+            
+            return(
+                <Table.Row key={consultation.id}>
+                    <Table.Cell>{consultation.date}</Table.Cell>
+                    <Table.Cell>{consultation.price}</Table.Cell>
+                    <Table.Cell>{consultation.remarks}</Table.Cell>
+                    <Table.Cell>
+                    
+                        <DeleteConsultationLink item={consultation}>
+                            Delete
+                        </DeleteConsultationLink>
+
+                        
+                    </Table.Cell>
+                </Table.Row>
+            );
+        })
+
         return(
             <div>
                 <Nav>
 
                 </Nav>
 
-                <PatientProfile>
+                <Grid columns={2} divided>
+					<Grid.Column width={4}>
+						<Card>
+							<Image src={matthew} />
+							<Header className="centered"></Header>
+							<Card.Content>
+								<Card.Meta>
+									
+								</Card.Meta>
+							
+								<Card.Description>
+									
+								</Card.Description>
+							</Card.Content>
 
-                </PatientProfile>
+							<Card.Content extra inline>
+								<Container inline>
+								
+									
+								</Container>
+							</Card.Content>
+						</Card>
+					</Grid.Column>
+
+					<Grid.Column width={10}>
+                        <Accordion fluid styled>
+
+                            <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
+                                <Icon name="dropdown"></Icon>Personal Information 
+                            </Accordion.Title>
+
+                            <Accordion.Content active={activeIndex === 0}>
+                                <p>Name: {this.state.firstName} {this.state.middleName} {this.state.lastName}</p>
+								<p>Age: {this.state.contactNumber}</p>
+                                <p>Address: {this.state.address}</p>
+                                <p>Civil Status: {this.state.civilStatus}</p>
+                                <p>Occupation: {this.state.occupation}</p>
+								<p>Contact Number: {this.state.contactNumber}</p>    
+                            </Accordion.Content>
+
+                            <Accordion.Title active={activeIndex === 1} index={1} onClick={this.handleClick}>
+                                <Icon name="dropdown"></Icon>Prescription History
+                            </Accordion.Title>
+
+                            <Accordion.Content active={activeIndex === 1}>
+                                <PrescriptionHistoryTable item={patient}>
+
+                                </PrescriptionHistoryTable>
+                            </Accordion.Content>
+
+                            <Accordion.Title active={activeIndex === 2} index={2} onClick={this.handleClick}>
+                                <Icon name="dropdown"></Icon>Dental Images
+                            </Accordion.Title>
+
+                            <Accordion.Content active={activeIndex === 2}>
+                                
+                               
+                            </Accordion.Content>
+
+                            <Accordion.Title active={activeIndex === 3} index={3} onClick={this.handleClick}>
+                                <Icon name="dropdown"></Icon>Dental Charts
+                            </Accordion.Title>
+
+                            <Accordion.Content active={activeIndex === 3}>
+                                <h3> {patient.id}</h3>
+                                <AddChart patient={patient}>
+                                    
+                                    </AddChart>
+                                <DentalCharts>
+
+                                </DentalCharts>
+                            </Accordion.Content>
+
+                            <Accordion.Title active={activeIndex === 4} index={4} onClick={this.handleClick}>
+                                <Icon name="dropdown"></Icon>Consultation History
+                            </Accordion.Title>
+
+                            <Accordion.Content active={activeIndex === 4}>
+                           
+                            <div>
+                                <p>Previous negotiations are reflected here</p>
+
+                                <Table celled>
+                                    <Table.Header>
+                                        <Table.Row>
+                                            <Table.HeaderCell>
+                                                Date Incurred
+                                            </Table.HeaderCell>
+
+                                            <Table.HeaderCell>
+                                                Payment
+                                            </Table.HeaderCell>
+
+                                            <Table.HeaderCell>
+                                                Remarks
+                                            </Table.HeaderCell>
+
+                                            <Table.HeaderCell>
+                                                Actions
+                                            </Table.HeaderCell>
+                                        </Table.Row>
+                                    </Table.Header>
+
+                                    <Table.Body>
+                                        {consultationTable}
+                                    </Table.Body>
+                                </Table>
+            </div>
+                            </Accordion.Content>
+                        </Accordion>
+					</Grid.Column>
+				</Grid>
 
             </div>
         );

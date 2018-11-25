@@ -2,7 +2,19 @@ import React, {Component} from 'react';
 import {Table, Button, Icon} from 'semantic-ui-react';
 
 class PrescriptionHistoryTable extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            item: props.item
+        }
+    }
+
+
     render(){
+
+        console.log("PHT:" +this.props.item.id);
+        
         return(
             <div>
                 <p>Previous prescriptions are seen here</p>
@@ -38,7 +50,7 @@ class PrescriptionHistoryTable extends Component{
                             </Table.Cell>
 
                             <Table.Cell>
-                                <Button positive>Edit</Button>
+                              
                                 <Button negative>Delete</Button>
                             </Table.Cell>
                         </Table.Row>
@@ -53,7 +65,7 @@ class PrescriptionHistoryTable extends Component{
                             </Table.Cell>
 
                             <Table.Cell>
-                                <Button positive>Edit</Button>
+                                
                                 <Button negative>Delete</Button>
                             </Table.Cell>
                         </Table.Row>

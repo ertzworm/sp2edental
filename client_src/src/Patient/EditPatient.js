@@ -4,12 +4,13 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 
-class AddPatient extends Component{
+class EditPatient extends Component{
 
     constructor(props){
         super(props);
         this.state = {
             open: true,
+            item: this.props.item,
             firstName: '',
             middleName: '',
             lastName: '',
@@ -21,32 +22,62 @@ class AddPatient extends Component{
             contactNumber: ''
         }
 
-        this.onAdd = this.onAdd.bind(this);
+        this.getPatient = this.getPatient.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.onEdit = this.onEdit.bind(this);
+
         this.handleChange = this.handleChange.bind(this);
     }
 
-    onAdd(){
-        const newPatient = {
+    componentWillMount(){
+        this.getPatient();
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+    }
+
+    onEdit(){
+
+        let patientId = this.props.match.params.id;
+        console.log(patientId);
+        const editedPatient = {
             firstName: this.state.firstName,
-            middleName: this.state.middleName,
+            middleName:this.state.middleName,
             lastName: this.state.lastName,
-            age: parseInt(this.state.age, 10),
+            age: this.state.age,
             sex: this.state.sex,
             civilStatus: this.state.civilStatus,
             occupation: this.state.occupation,
-            address: this.state.address,
-            contactNumber: this.state.contactNumber
+            address:this.state.address,
+            contactNumber: this.state.contactNumber,
         }
-
-        console.log(newPatient);
         
         axios.request({
-            method: "post",
-            url: "http://localhost:3001/api/patients/",
-            data: newPatient
+            method: "put",
+            url: "http://localhost:3001/api/patients/" + patientId,
+            data: editedPatient
         }).then(response => {
             this.props.history.push("/tabs/patients")  ;
         })
+    }
+
+    getPatient(){
+        let patientId = this.props.match.params.id;
+        axios.get("http://localhost:3001/api/patients/" + patientId).then( response =>
+            this.setState({
+                id: response.data.id,
+                firstName: response.data.firstName,
+                middleName: response.data.middleName,
+                lastName: response.data.lastName,
+                age: response.data.age,
+                sex: response.data.sex,
+                civilStatus: response.data.civilStatus,
+                occupation: response.data.occupation,
+                address: response.data.address,
+                contactNumber: response.data.contactNumber,
+            })
+        )
     }
 
     handleChange(e){
@@ -95,7 +126,7 @@ class AddPatient extends Component{
                     </Modal.Content>
                     <Modal.Actions>
                         <Link to="/tabs/patients/" className="ui button negative">Cancel</Link>
-                        <Button onClick={this.onAdd} positive>Confirm</Button>
+                        <Button onClick={this.onEdit} positive>Confirm</Button>
                     </Modal.Actions>
                 </Modal>
             </span>
@@ -103,4 +134,4 @@ class AddPatient extends Component{
     }
 }
 
-export default AddPatient;
+export default EditPatient;

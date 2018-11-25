@@ -3,6 +3,17 @@ import {Button, Table, Icon} from 'semantic-ui-react';
 
 
 class ConsultationHistory extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            item: props.item
+        }
+
+        
+    }
+
+
     render(){
         return(
             <div>

@@ -8,7 +8,17 @@ import ConsultationHistory from './ConsultationHistory';
 
 class PatientCollection extends Component{
 
-    state = {activeIndex: 0}
+    constructor(props){
+        super(props);
+        this.state = {
+            activeIndex: 0,
+            item: props.item
+
+        }
+
+        console.log(this.state.item);
+    }
+
 
     handleClick = (e, titleProps) => {
         const {index} = titleProps
@@ -16,10 +26,13 @@ class PatientCollection extends Component{
         const newIndex = activeIndex === index ? -1 : index
 
         this.setState({ activeIndex: newIndex })
+
+        
     }
 
     render(){
 
+        
         const {activeIndex} = this.state;
         
         return(

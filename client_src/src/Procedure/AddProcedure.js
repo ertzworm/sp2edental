@@ -55,25 +55,25 @@ class AddProcedure extends Component{
         return(
             <span>
                 <Modal dimmer={dimmer} open={open} onClose={this.close}>
-                <Modal.Header>Add Procedure</Modal.Header>
-                <Modal.Content>
-                    <Modal.Description>
-                        <Form>
-                            <Form.Group widths="equal">
-                                <Form.Input onChange={this.handleChange} value={this.state.name} label="Procedure Name" name="name" type="text" placeholder="Procedure Name" ref="name"></Form.Input>
-                                <Form.Input onChange={this.handleChange} value={this.state.description} label="Description" name="description" type="text" placeholder="Description" ref="description"></Form.Input>
-                                <Form.Input onChange={this.handleChange} value={this.state.price} label="Price" name="price" type="text" placeholder="Price" ref="price"></Form.Input>
-                            </Form.Group>
-                            
-                        </Form>
-                    </Modal.Description>
-                </Modal.Content>
-                <Modal.Actions>
-                    
-                    <Link to="/tabs/procedures/" className="ui button negative">Cancel</Link>
-                    <Button onClick={this.onAdd} positive>Confirm</Button>
-                </Modal.Actions>
-            </Modal>
+                    <Modal.Header>Add Procedure</Modal.Header>
+                    <Modal.Content>
+                        <Modal.Description>
+                            <Form>
+                                <Form.Group widths="equal">
+                                    <Form.Input onChange={this.handleChange} value={this.state.name} label="Procedure Name" name="name" type="text" placeholder="Procedure Name" ref="name"></Form.Input>
+                                    <Form.Input onChange={this.handleChange} value={this.state.description} label="Description" name="description" type="text" placeholder="Description" ref="description"></Form.Input>
+                                    <Form.Input onChange={this.handleChange} value={this.state.price} label="Price" name="price" type="text" placeholder="Price" ref="price"></Form.Input>
+                                </Form.Group>
+                                
+                            </Form>
+                        </Modal.Description>
+                    </Modal.Content>
+                    <Modal.Actions>
+                        
+                        <Link to="/tabs/procedures/" className="ui button negative">Cancel</Link>
+                        <Button onClick={this.onAdd} positive>Confirm</Button>
+                    </Modal.Actions>
+                </Modal>
             </span>
         );
     }

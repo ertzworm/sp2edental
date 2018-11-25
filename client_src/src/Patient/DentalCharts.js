@@ -6,9 +6,6 @@ class DentalCharts extends Component{
     render(){
         return(
             <div>
-                <p>White: Ok | Yellow: For Restoration | Red: For Extraction | Black: No tooth</p>
-            
-
                 <Table celled>
                     <Table.Header>
                         <Table.Row>

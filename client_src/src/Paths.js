@@ -4,13 +4,25 @@ import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom
 import Home from './Constants/Home.js';
 
 import Signin from './Constants/Signin.js';
-import PatientLayout from './Patient/PatientLayout.js';
+
 
 
 import AccountLayout from './Account/AccountLayout.js';
 import AccountProfile from './Account/AccountProfile';
-import PatientProfileLayout from './Patient/PatientProfileLayout.js';
 
+//Patient Components
+import PatientLayout from './Patient/PatientLayout.js';
+import PatientProfileLayout from './Patient/PatientProfileLayout.js';
+import AddPatient from './Patient/AddPatient';
+import EditPatient from './Patient/EditPatient';
+import DeletePatient from './Patient/DeletePatient';
+
+//Consultations
+import DeleteConsultation from './Patient/DeleteConsultation';
+import AddConsultation from './Patient/AddConsultation';
+
+//Charts
+import AddChart from './Patient/AddChart';
 
 //Medicine Components
 import MedicineLayout from './Medicine/MedicineLayout.js';
@@ -37,7 +49,18 @@ class LandingPage extends Component{
                     <Switch>
                         <Redirect strict exact from="/" to="/tabs/patients"></Redirect>
                         <Route path="/signin/" exact component={Signin}></Route>
+
+                        {/* Patients */}
                         <Route path="/tabs/patients/" exact component={PatientLayout}></Route>
+                        <Route path="/tabs/patients/view/:id" exact component={PatientProfileLayout}></Route>
+                        <Route path="/tabs/patients/add" exact component={AddPatient}></Route>
+                        <Route path="/tabs/patients/edit/:id" exact component={EditPatient}></Route>
+                        <Route path="/tabs/patients/delete/:id" exact component={DeletePatient}></Route> 
+
+                        {/* Consultations */}
+                        <Route path="/tabs/consultations/:id" exact component={DeleteConsultation}></Route>
+                        <Route path="/tabs/consultations/add/:id" exact component={AddConsultation}></Route>
+                        <Route path="/tabs/charts/add/:id" exact component={AddChart}></Route>
 
 
                         {/* Medicines */}
@@ -46,9 +69,7 @@ class LandingPage extends Component{
                         <Route path="/tabs/medicines/edit/:id" exact component={EditMedicine}></Route>
                         <Route path="/tabs/medicines/delete/:id" exact component={DeleteMedicine}></Route>
                         
-
-
-
+                        {/* Procedures */}
                         <Route path="/tabs/procedures/" exact component={ProcedureLayout}></Route>
                         <Route path="/tabs/procedures/add" exact component={AddProcedure}></Route>
                         <Route path="/tabs/procedures/edit/:id" exact component={EditProcedure}></Route>
