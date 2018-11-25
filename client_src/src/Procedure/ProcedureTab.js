@@ -6,6 +6,8 @@ import AddLink from './AddLink';
 import EditLink from './EditLink';
 import DeleteLink from './DeleteLink';
 
+import ProcedureCSVRead from './ProcedureCSVRead';
+
 import axios from 'axios';
 
 
@@ -91,7 +93,7 @@ class ProcedureTab extends Component{
                         <Segment attached="bottom">
                             <Menu.Item>
                                 <AddLink></AddLink>
-                                <Button color="green">Parse Procedure CSV</Button>
+                                <ProcedureCSVRead></ProcedureCSVRead>
                             </Menu.Item>
 
                             <Table celled>

@@ -3,7 +3,7 @@ import {Input} from 'semantic-ui-react';
 import axios from 'axios';
 
 
-const MedicineCSVRead = () => {
+const ProcedureCSVRead = () => {
     let fileReader;
 
     const handleFileRead = (e) => {
@@ -12,7 +12,7 @@ const MedicineCSVRead = () => {
 
         var temp = new Array();
         var temp2 = new Array();
-        var parsedMedicine = {};
+        var parsedProcedure = {};
 
         temp = content.split("\n");
 
@@ -25,16 +25,18 @@ const MedicineCSVRead = () => {
         for(i=0; i<temp.length; i++){
             temp2 = temp[i].split(",");
             
-            parsedMedicine = {
-                genericName: temp2[1],
-                brandName: temp2[0],
-                quantity: parseInt(temp2[2])
+            parsedProcedure = {
+                name: temp2[0],
+                description: temp2[1],
+                price: parseInt(temp2[2])
             }
+
+            console.log(parsedProcedure);
 
             axios.request({
                 method: "post",
-                url: "http://localhost:3001/api/medicines/",
-                data: parsedMedicine
+                url: "http://localhost:3001/api/procedures/",
+                data: parsedProcedure
             }).then(response => {
                 
             })
@@ -54,9 +56,9 @@ const MedicineCSVRead = () => {
 
     return(
         <span>
-            <br></br><Input type="file" id="file" className="input-file" accept=".csv" onChange={ e => handleFileChosen(e.target.files[0])}></Input>
+            <Input type="file" id="file" className="input-file" accept=".csv" onChange={ e => handleFileChosen(e.target.files[0])}></Input>
         </span>
     )
 };
 
-export default MedicineCSVRead;
+export default ProcedureCSVRead;

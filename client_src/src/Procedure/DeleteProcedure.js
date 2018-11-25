@@ -32,7 +32,7 @@ class DeleteProcedure extends Component{
         let procedureId = this.props.match.params.id;
         axios.delete("http://localhost:3001/api/procedures/" +procedureId).then(
             reponse => {
-                this.props.history.push('/tabs/procedure');
+                this.props.history.push('/tabs/procedures');
             }
         )
     }
