@@ -1,15 +1,16 @@
 import React, {Component} from 'react';
 import Nav from '../Constants/Nav.js';
-import {Header, Container, Image, Card, Grid, Table} from 'semantic-ui-react';
+import {Header, Container, Image, Card, Grid, Table, Button} from 'semantic-ui-react';
 import {Accordion, Icon} from 'semantic-ui-react';
 
 
 import PrescriptionHistoryTable from './PrescriptionHistoryTable';
-import DentalImages from './DentalImages';
 
 
 import DeleteConsultationLink from './DeleteConsultationLink'
 import AddChart from './AddChart';
+
+import DeleteImageLink from './DeleteImageLink';
 
 import ViewChartLink from './ViewChartLink';
 import DeleteChartLink from './DeleteChartLink';
@@ -20,6 +21,7 @@ import axios from 'axios';
 
 let consultationTable;
 let chartsTable;
+let imagesTable;
 
 class PatientProfileLayout extends Component{
 
@@ -39,6 +41,7 @@ class PatientProfileLayout extends Component{
             contactNumber: '',
             consultations: [],
             charts: [],
+            images: [],
             patient: '',
         }
 
@@ -51,6 +54,7 @@ class PatientProfileLayout extends Component{
         this.getPatient();
         this.getConsultations();
         this.getCharts();
+        this.getImages();
     }
 
     handleClick = (e, titleProps) => {
@@ -99,12 +103,22 @@ class PatientProfileLayout extends Component{
         )
     }
 
+    getImages(){
+        let patientId = this.props.match.params.id;
+        axios.get("http://localhost:3001/api/patients/" + patientId + "/images").then( response =>
+            this.setState({
+                images: response.data
+            })
+        )
+    }
+
     render(){
         
         const {activeIndex} = this.state;
         const consultations = this.state.consultations;
         const {patient} = this.state;
         const {charts} = this.state;
+        const {images} = this.state;
 
         consultationTable  = consultations.map(consultation =>{
             
@@ -144,6 +158,19 @@ class PatientProfileLayout extends Component{
                         </DeleteChartLink>    
                     </Table.Cell>
                 </Table.Row>
+            )
+        })
+
+        imagesTable = images.map(image => {
+            return(
+                
+                    <Card raised>
+                        <Image src={image.buffer} size="medium"></Image>                        
+                        <Card.Content extra>
+                            <DeleteImageLink item={image}></DeleteImageLink>
+                        </Card.Content>
+                    </Card>
+                
             )
         })
 
@@ -208,6 +235,14 @@ class PatientProfileLayout extends Component{
                             </Accordion.Title>
 
                             <Accordion.Content active={activeIndex === 2}>
+                           
+                                <Card.Group itemsPerRow={4}>
+                                    {imagesTable}
+                                </Card.Group>
+                                    
+                                
+                                    
+                        
                                 
                                
                             </Accordion.Content>

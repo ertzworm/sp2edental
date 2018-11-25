@@ -26,6 +26,10 @@ import AddChart from './Patient/AddChart';
 import ViewChart from './Patient/ViewChart';
 import DeleteChart from './Patient/DeleteChart';
 
+//Images
+import AddImage from './Patient/AddImage';
+import DeleteImage from './Patient/DeleteImage';
+
 //Medicine Components
 import MedicineLayout from './Medicine/MedicineLayout.js';
 import AddMedicine from './Medicine/AddMedicine';
@@ -49,7 +53,7 @@ class LandingPage extends Component{
                 
                 <Home>
                     <Switch>
-                        <Redirect strict exact from="/" to="/tabs/patients"></Redirect>
+                        <Redirect strict exact from="/" to="/signin/"></Redirect>
                         <Route path="/signin/" exact component={Signin}></Route>
 
                         {/* Patients */}
@@ -57,7 +61,11 @@ class LandingPage extends Component{
                         <Route path="/tabs/patients/view/:id" exact component={PatientProfileLayout}></Route>
                         <Route path="/tabs/patients/add" exact component={AddPatient}></Route>
                         <Route path="/tabs/patients/edit/:id" exact component={EditPatient}></Route>
-                        <Route path="/tabs/patients/delete/:id" exact component={DeletePatient}></Route> 
+                        <Route path="/tabs/patients/delete/:id" exact component={DeletePatient}></Route>
+
+                        {/* Images */}
+                        <Route path="/tabs/images/add/:id" exact component={AddImage}></Route>
+                        <Route path="/tabs/images/delete/:id" exact component={DeleteImage}></Route>
 
                         {/* Consultations */}
                         <Route path="/tabs/consultations/:id" exact component={DeleteConsultation}></Route>

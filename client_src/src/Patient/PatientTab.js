@@ -4,8 +4,10 @@ import axios from 'axios';
 
 import ViewLink from './ViewLink';
 import AddLink from './AddLink';
+import AddImageLink from './AddImageLink';
 import EditLink from './EditLink';
 import DeleteLink from './DeleteLink';
+
 import PatientCSVRead from './PatientCSVRead';
 
 import AddChartsLink from './AddChartLink';
@@ -82,7 +84,9 @@ class PatientTab extends Component{
                                 <Dropdown.Item>
                                     <AddChartsLink item={patient}></AddChartsLink>
                                 </Dropdown.Item>
-                                <Dropdown.Item>Add Images</Dropdown.Item>
+                                <Dropdown.Item>
+                                    <AddImageLink item={patient}></AddImageLink>
+                                </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
 

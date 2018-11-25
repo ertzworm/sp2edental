@@ -100,7 +100,7 @@ class EditPatient extends Component{
         return(
             <span>
                 <Modal dimmer={dimmer} open={open} onClose={this.close}>
-                    <Modal.Header>Add Patient</Modal.Header>
+                    <Modal.Header>Edit Patient</Modal.Header>
                     <Modal.Content>
                         <Form>
                             <Form.Group widths="equal">
