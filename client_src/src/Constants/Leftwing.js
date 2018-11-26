@@ -2,16 +2,46 @@ import React, {Component} from 'react';
 import {Menu, Input, Image, Label} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import daniel from '../images/daniel.jpg';
+import axios from 'axios';
 
+let userName, password;
 
 class Leftwing extends Component{
 
-    state = {}
+    constructor(props){
+        super(props);
+        this.state = {
+            accounts: [],
+        }
+    }
+
+
     handleItemClick = (e, { name }) => this.setState({ activeItem: name})
 
-    render(){
+    componentWillMount(){
+        userName = localStorage.getItem("userName");
+        password = localStorage.getItem("password");
 
+        console.log(userName);
+
+        axios.get("http://localhost:3001/api/Accounts").then(response => {
+            var i=0;
+            for(i=0; i<response.data.length; i++){
+                if(userName === response.data[i].userName){
+                    if(password === response.data[i].password){
+                        this.setState({accounts: response.data[i]});
+                        
+                    }
+                }
+            }
+            
+            
+        })
+    }
+
+    render(){
         const {activeItem} = this.state;
+        
 
         return(
             
@@ -28,7 +58,7 @@ class Leftwing extends Component{
                 </Menu.Item>
 
                 <Menu.Item>
-                    Dr. Squeeps Kowalksi
+                    {this.state.accounts.firstName} {this.state.accounts.lastName}
                 </Menu.Item>
 
                 <Menu.Item>
@@ -73,11 +103,11 @@ class Leftwing extends Component{
                             </Menu.Item>
                         
                         
-                            <Menu.Item>
+                            {/* <Menu.Item>
                                 <Link to="/account/">
                                 System Accounts
                                 </Link>        
-                            </Menu.Item>
+                            </Menu.Item> */}
                         
                         
                         

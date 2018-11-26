@@ -132,10 +132,6 @@ class ProcedureTab extends Component{
 
                             </Table>
 
-                            <Segment textAlign="center">
-                                <Pagination defaultActivePage={5} totalPages={5} />
-                            </Segment>
-
                         </Segment>
                     </Container>
                 </Container>

@@ -21,6 +21,10 @@ import DeletePatient from './Patient/DeletePatient';
 import DeleteConsultation from './Patient/DeleteConsultation';
 import AddConsultation from './Patient/AddConsultation';
 
+//Prescriptions
+import AddPrescription from './Patient/AddPrescription';
+import DeletePrescription from './Patient/DeletePrescriptionLink';
+
 //Charts
 import AddChart from './Patient/AddChart';
 import ViewChart from './Patient/ViewChart';
@@ -46,35 +50,22 @@ import DeleteProcedure from './Procedure/DeleteProcedure';
 const NotFound = () => <h2>Route not found!</h2>;
 
 const checkAuth = () => {
-    const tokenId = localStorage.getItem("tokenId");
-    const tokenTtl = localStorage.getItem("tokenTtl");
-    const currentUserId = localStorage.getItem("currentUserId");
+    const userName = localStorage.getItem("userName");
+    const password = localStorage.getItem("password");
+    const isAdmin = localStorage.getItem("isAdmin");
+    const isVerified = localStorage.getItem("isVerified");
 
-    console.log(tokenId);
-    console.log(tokenTtl);
-    console.log(currentUserId);
-
-    if (!tokenId) {
-    
+    if (!userName) {
         alert("No user login found!")
+        localStorage.clear();
+        return false;
+    }else if(isVerified === "false"){
+        alert("User not verified!");
+        localStorage.clear();
         return false;
     }
-  
-    try {
-      // { exp: 12903819203 }
-      const { exp } = tokenTtl;
-  
-      if (exp < new Date().getTime() / 1000) {
-        alert("Session timed out!");
-        return false;
-      }
-  
-    } catch (e) {
-        
-        return false;
-    }
-  
-    console.log("Has access!");
+
+    
     return true;
   }
 
@@ -88,6 +79,8 @@ const AuthRoute = ({ component: Component, ...rest }) => (
         )
     )} />
   )
+
+
 
 class LandingPage extends Component{
     render(){
@@ -114,6 +107,10 @@ class LandingPage extends Component{
                         {/* Consultations */}
                         <AuthRoute path="/tabs/consultations/:id" exact component={DeleteConsultation}></AuthRoute>
                         <AuthRoute path="/tabs/consultations/add/:id" exact component={AddConsultation}></AuthRoute>
+
+                        {/* Prescriptions */}
+                        <AuthRoute path="/tabs/prescriptions/add/:id" exact component={AddPrescription}></AuthRoute>
+                        <AuthRoute path="/tabs/prescriptions/delete/:id" exact component={DeletePrescription}></AuthRoute> 
                         
                         {/* Charts */}
                         <AuthRoute path="/tabs/charts/view/:id" exact component={ViewChart}></AuthRoute>

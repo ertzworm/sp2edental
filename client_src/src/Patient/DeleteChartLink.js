@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-const DeleteChartLink = ({ item }) =>
+let isAdmin = localStorage.getItem("isAdmin");
+let DeleteChartLink;
+
+if(isAdmin === "false"){
+    DeleteChartLink = ({ item }) =>
+    <Link className="ui button disabled negative" to={"/tabs/charts/delete/" +item.id}>Delete</Link>;
+}else{
+    DeleteChartLink = ({ item }) =>
     <Link className="ui button negative" to={"/tabs/charts/delete/" +item.id}>Delete</Link>;
- 
+}
+
 
 export default DeleteChartLink;

@@ -13,6 +13,7 @@ import PatientCSVRead from './PatientCSVRead';
 import AddChartsLink from './AddChartLink';
 
 import AddConsultationLink from './AddConsultationLink';
+import AddPrescriptionLink from './AddPrescriptionLink';
 
 
 const getPatientQuery = "http://localhost:3001/api/Patients";
@@ -87,6 +88,10 @@ class PatientTab extends Component{
                                 <Dropdown.Item>
                                     <AddImageLink item={patient}></AddImageLink>
                                 </Dropdown.Item>
+
+                                <Dropdown.Item>
+                                    <AddPrescriptionLink item={patient}></AddPrescriptionLink>
+                                </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
 
@@ -151,10 +156,6 @@ class PatientTab extends Component{
 
 
                             </Table>
-
-                            <Segment textAlign="center">
-                                <Pagination defaultActivePage={5} totalPages={5} />
-                            </Segment>
 
                         </Segment>
                     </Container>

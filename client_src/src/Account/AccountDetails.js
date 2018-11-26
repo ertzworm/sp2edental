@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import {Form, Button, Segment, Divider, Header} from 'semantic-ui-react';
+import axios from 'axios';
+import {withRouter} from 'react-router-dom';
 
+
+let userName, password;
 
 class AccountDetails extends Component{
 
@@ -11,22 +15,109 @@ class AccountDetails extends Component{
         this.state = {
             labelInf: "Edit",
             isEdit: true,
+            id: "",
+            userName: "",
+            password: "",
+
+            firstName: "",
+            middleName: "",
+            lastName: "",
+    
+            age: 0,
+            sex: "",
+    
+            licenseNumber: "",
+            ptrNumber: "",
+            contactNumber: "",
+    
+            address: "",
+            isAdmin: "",
+            isVerified: "",
+
         }
         
+        this.handleChange = this.handleChange.bind(this);
         
     }
 
-        setLabel(){
-            console.log(this.state.isEdit);
+    componentWillMount(){
 
-            if(this.state.isEdit === true){
-                this.setState({ labelInf: "Confirm"});
-                this.setState({ isEdit: false });
-               
-            }else{
-                this.setState({ labelInf: "Edit"});
-                this.setState({ isEdit: true});
-            }            
+        userName = localStorage.getItem("userName");
+        password = localStorage.getItem("password");
+
+        axios.get("http://localhost:3001/api/Accounts").then(response => {
+            var i=0;
+            for(i=0; i<response.data.length; i++){
+                if(userName === response.data[i].userName){
+                    console.log(userName);
+                    if(password === response.data[i].password){
+                        this.setState({
+                            id: response.data[i].id,
+                            userName: response.data[i].userName,
+                            password: response.data[i].password,
+                
+                            firstName: response.data[i].firstName,
+                            middleName: response.data[i].middleName,
+                            lastName: response.data[i].lastName,
+                    
+                            age: parseInt(response.data[i].age, 10),
+                            sex: response.data[i].sex,
+                    
+                            licenseNumber: response.data[i].licenseNumber,
+                            ptrNumber: response.data[i].ptrNumber,
+                            contactNumber:response.data[i].contactNumber,
+
+                            isAdmin: response.data[i].isAdmin,
+                            isVerified: response.data[i].isVerified,
+                    
+                            address: response.data[i].address,
+                        });
+                    }
+                }
+            }
+        })
+    }
+
+        setLabel(){
+            const editedAccount = {
+                userName: this.state.userName,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                middleName: this.state.middleName,
+                lastName: this.state.lastName,
+                age: parseInt(this.state.age, 10),
+                sex: this.state.sex,
+                address: this.state.address,
+                ptrNumber: this.state.ptrNumber,
+                licenseNumber: this.state.licenseNumber,
+                contactNumber: this.state.contactNumber,
+                isAdmin: this.state.isAdmin,
+                isVerified: this.state.isVerified,
+                id: this.state.id
+              }
+
+              const getId = this.state.id;
+              console.log(getId);
+
+              axios.request({
+                method: "put",
+                url: "http://localhost:3001/api/Accounts/" + getId,
+                data: editedAccount
+            }).then(response => {
+                this.props.history.push("/tabs/patients");
+            })
+
+              console.log(editedAccount);
+        }
+
+        handleChange(e){
+            const target = e.target;
+            const value = target.value;
+            const name = target.name;
+    
+            this.setState({
+                [name]: value
+            });
         }
 
 
@@ -35,6 +126,7 @@ class AccountDetails extends Component{
         //Pass your state parameters from the constructor to your render function
         //Access them as initialized
         const {labelInf} = this.state;
+       
 
         return(
             <div>
@@ -42,42 +134,39 @@ class AccountDetails extends Component{
                 <Button onClick={this.setLabel.bind(this)} positive>{labelInf}</Button>
 
                 <Segment stacked>
-                    <Form>
+                <Form>
 
-                        <Header>Security</Header>
-
-                        <Form.Group>
-                            <Form.Input width={5} label="Username" placeholder="ertzunltd" readOnly></Form.Input>
-                            <Form.Input width={5} label="Password" placeholder="******" type="password" readOnly></Form.Input>
+                        <Form.Group widths="equal">
+                            <Form.Input onChange={this.handleChange} value={this.state.userName} name="userName" type="text" fluid label="Username" placeholder="Username"></Form.Input>
+                            <Form.Input onChange={this.handleChange} value={this.state.password} name="password" type="text" fluid label="Password" placeholder="Password"></Form.Input>
                         </Form.Group>
 
                         <Divider></Divider>
 
                         <Header>Personal Information</Header>
-
                         <Form.Group widths="equal">
-                            <Form.Input fluid label="First Name" placeholder="Squeeps" readOnly></Form.Input>
-                            <Form.Input fluid label="Middle Name" placeholder="Nai" readOnly></Form.Input>
-                            <Form.Input fluid label="Last Name" placeholder="Kowalksi" readOnly></Form.Input>    
+                            <Form.Input onChange={this.handleChange} value={this.state.firstName} name="firstName" type="text" fluid label="First Name" placeholder="First Name"></Form.Input>
+                            <Form.Input onChange={this.handleChange} value={this.state.middleName} name="middleName" type="text" fluid label="Middle Name" placeholder="Middle Name"></Form.Input>
+                            <Form.Input onChange={this.handleChange} value={this.state.lastName} name="lastName" type="text" fluid label="Last Name" placeholder="Last Name"></Form.Input>
                         </Form.Group>
 
-                        
-                        
-                        <Form.Group widths="equal">
-                            <Form.Input fluid label="Civil Status" placeholder="Married" readOnly></Form.Input>
-                            <Form.Input fluid label="Occupation" placeholder="Acting Dentist" readOnly></Form.Input>
-                            <Form.Input fluid label="Sex" placeholder="Male" readOnly></Form.Input>
+                        <Form.Group>
+                            <Form.Input onChange={this.handleChange} value={this.state.age} name="age" type="text" label="Age" placeholder="Age" />
+                            <Form.Input onChange={this.handleChange} value={this.state.sex} name="sex" type="text" label="Sex" placeholder="Sex" />
                         </Form.Group>
 
+                        <Divider></Divider>
+
                         <Form.Group widths="equal">
-                            <Form.Input fluid label="License Number" placeholder="2541535" readOnly></Form.Input>
-                            <Form.Input fluid label="Ptr Number" placeholder="254774" readOnly></Form.Input>
-                            <Form.Input fluid label="Contact Number" placeholder="+639265035246" readOnly></Form.Input>
-                            <Form.Input fluid label="Birthday" placeholder="April 18, 1995" readOnly></Form.Input>
+                            
+                            <Form.Input onChange={this.handleChange} value={this.state.licenseNumber} name="licenseNumber" type="text" fluid label="License Number" placeholder="License Number"></Form.Input>
+                            <Form.Input onChange={this.handleChange} value={this.state.ptrNumber} name="ptrNumber" type="text" fluid label="Ptr Number" placeholder="Ptr Number"></Form.Input>
+                            <Form.Input onChange={this.handleChange} value={this.state.contactNumber} name="contactNumber" type="text" fluid label="Contact Number" placeholder="Contact Number"></Form.Input>
+                            
                         </Form.Group>
 
-                        
-                    </Form>
+                        <Form.Input onChange={this.handleChange} value={this.state.address} name="address" type="text" fluid label="Address" placeholder="Address"></Form.Input>
+                        </Form>
                 </Segment>
                 
 
@@ -86,4 +175,4 @@ class AccountDetails extends Component{
     }
 }
 
-export default AccountDetails;
+export default withRouter(AccountDetails);

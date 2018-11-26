@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Form, Grid, Header, Message, Segment, Button} from 'semantic-ui-react';
+import Signup from './Signup';
 
 import {Link} from 'react-router-dom';
 import axios from 'axios';
@@ -21,25 +22,36 @@ class Signin extends Component{
     
 
     handleLogin(){
-        console.log("email is: " +this.state.email);
-        console.log("password is: " +this.state.password);
+        
 
         const userData = {
             email: this.state.email,
             password: this.state.password
         }
 
+        //Get User
+        axios.get("http://localhost:3001/api/Accounts").then(response => {
+           
+            var i=0;
+            for(i=0; i<response.data.length; i++){
+               
+                if(userData.email == response.data[i].userName){
+                    
+                    if(userData.password == response.data[i].password){
+                        
+                        localStorage.setItem("userName", userData.email);
+                        localStorage.setItem("password", userData.password);
+                        localStorage.setItem("isAdmin", response.data[i].isAdmin);
+                        localStorage.setItem("isVerified", response.data[i].isVerified);
+                        
 
-        axios.request({
-            method: "post",
-            url: "http://localhost:3001/api/Users/login",
-            data: userData
-        }).then(response => {
-            localStorage.setItem("tokenId", response.data.id)
-            localStorage.setItem("tokenTtl", response.data.ttl)
-            localStorage.setItem("currentUserId", response.data.userId)
-            this.props.history.push("/tabs/patients");
-        }).catch(err => console.log(err))
+                        this.props.history.push("/tabs/patients");
+                    }
+                }
+            }
+            
+            
+        })
 
     }
 
@@ -87,13 +99,13 @@ class Signin extends Component{
 
 								<Form.Input onChange={this.handleChange} value={password} name="password" fluid icon="lock" iconPosition="left" placeholder="Password" type="password" />
 
-								<Button onClick={this.handleLogin} positive>Sign in</Button>
+								<Button onClick={this.handleLogin} color="blue">Sign in</Button>
 							
 							</Segment>
                         </Form>
 
 						<Message>
-							No account? <strong>Sign up!</strong>
+							<Signup></Signup>
 						</Message>
                     </Grid.Column>
                 </Grid>

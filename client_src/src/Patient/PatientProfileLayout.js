@@ -4,16 +4,13 @@ import {Header, Container, Image, Card, Grid, Table, Button} from 'semantic-ui-r
 import {Accordion, Icon} from 'semantic-ui-react';
 
 
-import PrescriptionHistoryTable from './PrescriptionHistoryTable';
-
-
 import DeleteConsultationLink from './DeleteConsultationLink'
-import AddChart from './AddChart';
-
+import DeletePrescriptionLink from './DeletePrescriptionLink';
 import DeleteImageLink from './DeleteImageLink';
+import DeleteChartLink from './DeleteChartLink';
 
 import ViewChartLink from './ViewChartLink';
-import DeleteChartLink from './DeleteChartLink';
+
 
 import matthew from '../images/matthew.png';
 
@@ -22,6 +19,7 @@ import axios from 'axios';
 let consultationTable;
 let chartsTable;
 let imagesTable;
+let prescriptionTable;
 
 class PatientProfileLayout extends Component{
 
@@ -42,12 +40,15 @@ class PatientProfileLayout extends Component{
             consultations: [],
             charts: [],
             images: [],
+            prescriptions: [],
             patient: '',
         }
 
         this.getPatient = this.getPatient.bind(this);
         this.getConsultations = this.getConsultations.bind(this);
         this.getCharts = this.getCharts.bind(this);
+        this.getPrescriptions = this.getPrescriptions.bind(this);
+        this.getImages = this.getImages.bind(this);
     }
 
     componentWillMount(){
@@ -55,6 +56,7 @@ class PatientProfileLayout extends Component{
         this.getConsultations();
         this.getCharts();
         this.getImages();
+        this.getPrescriptions();
     }
 
     handleClick = (e, titleProps) => {
@@ -81,8 +83,6 @@ class PatientProfileLayout extends Component{
                 patient: response.data
             })
         )
-
-        
     }
     
     getConsultations(){
@@ -112,6 +112,15 @@ class PatientProfileLayout extends Component{
         )
     }
 
+    getPrescriptions(){
+        let patientId = this.props.match.params.id;
+        axios.get("http://localhost:3001/api/patients/" + patientId + "/prescriptions").then( response =>
+            this.setState({
+                prescriptions: response.data
+            })
+        )
+    }
+
     render(){
         
         const {activeIndex} = this.state;
@@ -119,6 +128,7 @@ class PatientProfileLayout extends Component{
         const {patient} = this.state;
         const {charts} = this.state;
         const {images} = this.state;
+        const {prescriptions} = this.state;
 
         consultationTable  = consultations.map(consultation =>{
             
@@ -156,6 +166,20 @@ class PatientProfileLayout extends Component{
                         <DeleteChartLink item={chart}>
                             Delete Chart
                         </DeleteChartLink>    
+                    </Table.Cell>
+                </Table.Row>
+            )
+        })
+
+        prescriptionTable = prescriptions.map(prescription =>{
+            return(
+                <Table.Row key={prescription.id}>
+                    <Table.Cell>{prescription.prescription}</Table.Cell>
+                    <Table.Cell>{prescription.date}</Table.Cell>
+                    <Table.Cell>
+                        <DeletePrescriptionLink item={prescription}>
+                            Delete Prescription
+                        </DeletePrescriptionLink>
                     </Table.Cell>
                 </Table.Row>
             )
@@ -225,9 +249,29 @@ class PatientProfileLayout extends Component{
                             </Accordion.Title>
 
                             <Accordion.Content active={activeIndex === 1}>
-                                <PrescriptionHistoryTable item={patient}>
+                                <Table celled>
+                                        <Table.Header>
+                                            <Table.Row>
+                                                <Table.HeaderCell>
+                                                    Number
+                                                </Table.HeaderCell>
 
-                                </PrescriptionHistoryTable>
+                                                <Table.HeaderCell>
+                                                    Date Procured
+                                                </Table.HeaderCell>
+
+                                                <Table.HeaderCell>
+                                                    Actions
+                                                </Table.HeaderCell>
+                                            </Table.Row>
+                                        </Table.Header>
+
+                                        <Table.Body>
+                                            
+                                            {prescriptionTable}
+                                                
+                                        </Table.Body>
+                                </Table>
                             </Accordion.Content>
 
                             <Accordion.Title active={activeIndex === 2} index={2} onClick={this.handleClick}>
@@ -252,7 +296,7 @@ class PatientProfileLayout extends Component{
                             </Accordion.Title>
 
                             <Accordion.Content active={activeIndex === 3}>
-                                <h3> {patient.id}</h3>
+                                
                                 
 
                                 <Table celled>
@@ -321,7 +365,7 @@ class PatientProfileLayout extends Component{
                                         {consultationTable}
                                     </Table.Body>
                                 </Table>
-            </div>
+                            </div>
                             </Accordion.Content>
                         </Accordion>
 					</Grid.Column>
