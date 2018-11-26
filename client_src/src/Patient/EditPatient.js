@@ -58,7 +58,7 @@ class EditPatient extends Component{
             url: "http://localhost:3001/api/patients/" + patientId,
             data: editedPatient
         }).then(response => {
-            this.props.history.push("/tabs/patients")  ;
+            this.props.history.push("/tabs/patients");
         })
     }
 

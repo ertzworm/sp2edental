@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Menu, Button, Icon, Image} from 'semantic-ui-react';
 import logo from '../images/eDental-logo.png';
 import {Link} from 'react-router-dom';
+import Signout from './Signout';
 
 import {createBrowserHistory} from 'history';
 
@@ -34,7 +35,7 @@ class Nav extends Component{
                     </Link>
 				</Menu.Item>
 
-                <Menu.Item position="right">Sign out</Menu.Item>
+                <Menu.Item position="right"><Signout /></Menu.Item>
             </Menu>
 
         );

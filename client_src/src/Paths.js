@@ -45,6 +45,49 @@ import DeleteProcedure from './Procedure/DeleteProcedure';
 
 const NotFound = () => <h2>Route not found!</h2>;
 
+const checkAuth = () => {
+    const tokenId = localStorage.getItem("tokenId");
+    const tokenTtl = localStorage.getItem("tokenTtl");
+    const currentUserId = localStorage.getItem("currentUserId");
+
+    console.log(tokenId);
+    console.log(tokenTtl);
+    console.log(currentUserId);
+
+    if (!tokenId) {
+    
+        alert("No user login found!")
+        return false;
+    }
+  
+    try {
+      // { exp: 12903819203 }
+      const { exp } = tokenTtl;
+  
+      if (exp < new Date().getTime() / 1000) {
+        alert("Session timed out!");
+        return false;
+      }
+  
+    } catch (e) {
+        
+        return false;
+    }
+  
+    console.log("Has access!");
+    return true;
+  }
+
+
+const AuthRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={props => (
+      checkAuth() ? (
+        <Component {...props} />
+      ) : (
+          <Redirect to={{ pathname: '/signin' }} />
+        )
+    )} />
+  )
 
 class LandingPage extends Component{
     render(){
@@ -52,48 +95,49 @@ class LandingPage extends Component{
             <Router>
                 
                 <Home>
+                    
                     <Switch>
                         <Redirect strict exact from="/" to="/signin/"></Redirect>
                         <Route path="/signin/" exact component={Signin}></Route>
 
                         {/* Patients */}
-                        <Route path="/tabs/patients/" exact component={PatientLayout}></Route>
-                        <Route path="/tabs/patients/view/:id" exact component={PatientProfileLayout}></Route>
-                        <Route path="/tabs/patients/add" exact component={AddPatient}></Route>
-                        <Route path="/tabs/patients/edit/:id" exact component={EditPatient}></Route>
-                        <Route path="/tabs/patients/delete/:id" exact component={DeletePatient}></Route>
+                        <AuthRoute path="/tabs/patients/" exact component={PatientLayout}></AuthRoute>
+                        <AuthRoute path="/tabs/patients/view/:id" exact component={PatientProfileLayout}></AuthRoute>
+                        <AuthRoute path="/tabs/patients/add" exact component={AddPatient}></AuthRoute>
+                        <AuthRoute path="/tabs/patients/edit/:id" exact component={EditPatient}></AuthRoute>
+                        <AuthRoute path="/tabs/patients/delete/:id" exact component={DeletePatient}></AuthRoute>
 
                         {/* Images */}
-                        <Route path="/tabs/images/add/:id" exact component={AddImage}></Route>
-                        <Route path="/tabs/images/delete/:id" exact component={DeleteImage}></Route>
+                        <AuthRoute path="/tabs/images/add/:id" exact component={AddImage}></AuthRoute>
+                        <AuthRoute path="/tabs/images/delete/:id" exact component={DeleteImage}></AuthRoute>
 
                         {/* Consultations */}
-                        <Route path="/tabs/consultations/:id" exact component={DeleteConsultation}></Route>
-                        <Route path="/tabs/consultations/add/:id" exact component={AddConsultation}></Route>
+                        <AuthRoute path="/tabs/consultations/:id" exact component={DeleteConsultation}></AuthRoute>
+                        <AuthRoute path="/tabs/consultations/add/:id" exact component={AddConsultation}></AuthRoute>
                         
                         {/* Charts */}
-                        <Route path="/tabs/charts/view/:id" exact component={ViewChart}></Route>
-                        <Route path="/tabs/charts/add/:id" exact component={AddChart}></Route>
-                        <Route path="/tabs/charts/delete/:id" exact component={DeleteChart}></Route>
+                        <AuthRoute path="/tabs/charts/view/:id" exact component={ViewChart}></AuthRoute>
+                        <AuthRoute path="/tabs/charts/add/:id" exact component={AddChart}></AuthRoute>
+                        <AuthRoute path="/tabs/charts/delete/:id" exact component={DeleteChart}></AuthRoute>
 
 
                         {/* Medicines */}
-                        <Route path="/tabs/medicines/" exact component={MedicineLayout}></Route>
-                        <Route path="/tabs/medicines/add" exact component={AddMedicine}></Route>
-                        <Route path="/tabs/medicines/edit/:id" exact component={EditMedicine}></Route>
-                        <Route path="/tabs/medicines/delete/:id" exact component={DeleteMedicine}></Route>
+                        <AuthRoute path="/tabs/medicines/" exact component={MedicineLayout}></AuthRoute>
+                        <AuthRoute path="/tabs/medicines/add" exact component={AddMedicine}></AuthRoute>
+                        <AuthRoute path="/tabs/medicines/edit/:id" exact component={EditMedicine}></AuthRoute>
+                        <AuthRoute path="/tabs/medicines/delete/:id" exact component={DeleteMedicine}></AuthRoute>
                         
                         {/* Procedures */}
-                        <Route path="/tabs/procedures/" exact component={ProcedureLayout}></Route>
-                        <Route path="/tabs/procedures/add" exact component={AddProcedure}></Route>
-                        <Route path="/tabs/procedures/edit/:id" exact component={EditProcedure}></Route>
-                        <Route path="/tabs/procedures/delete/:id" exact component={DeleteProcedure}></Route>
+                        <AuthRoute path="/tabs/procedures/" exact component={ProcedureLayout}></AuthRoute>
+                        <AuthRoute path="/tabs/procedures/add" exact component={AddProcedure}></AuthRoute>
+                        <AuthRoute path="/tabs/procedures/edit/:id" exact component={EditProcedure}></AuthRoute>
+                        <AuthRoute path="/tabs/procedures/delete/:id" exact component={DeleteProcedure}></AuthRoute>
 
 
 
-                        <Route path="/account/" exact component={AccountLayout}></Route>
-                        <Route path="/account/profile/" exact component={AccountProfile}></Route>
-                        <Route path="/tabs/patients/alec/" exact component={PatientProfileLayout}></Route>
+                        <AuthRoute path="/account/" exact component={AccountLayout}></AuthRoute>
+                        <AuthRoute path="/account/profile/" exact component={AccountProfile}></AuthRoute>
+                        <AuthRoute path="/tabs/patients/alec/" exact component={PatientProfileLayout}></AuthRoute>
 
 
 
