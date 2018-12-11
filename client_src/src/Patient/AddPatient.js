@@ -39,12 +39,30 @@ class AddPatient extends Component{
         }
 
         console.log(newPatient);
+
+      
         
         axios.request({
             method: "post",
             url: "http://localhost:3001/api/patients/",
             data: newPatient
         }).then(response => {
+
+            const currentDate = new Date();
+            const newLog = {
+                activity: "Added patient: " +this.state.lastName,
+                date: currentDate,
+                user: localStorage.userName,
+
+            }
+
+            console.log(newLog);
+            axios.request({
+                method: "post",
+                url: "http://localhost:3001/api/logs/",
+                data: newLog
+            })
+            
             this.props.history.push("/tabs/patients") ;
         })
     }
@@ -56,8 +74,10 @@ class AddPatient extends Component{
 
         this.setState({
             [name]: value
-        });
-    }
+		});
+	}
+
+
 
     show = dimmer => () => this.setState({ dimmer, open: true })
     close = () => this.setState({ open: false })
@@ -65,6 +85,7 @@ class AddPatient extends Component{
     render(){
 
         const {open, dimmer} = this.state;
+     
 
         return(
             <span>

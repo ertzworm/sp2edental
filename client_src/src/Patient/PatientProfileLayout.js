@@ -2,8 +2,13 @@ import React, {Component} from 'react';
 import Nav from '../Constants/Nav.js';
 import {Header, Container, Image, Card, Grid, Table, Button} from 'semantic-ui-react';
 import {Accordion, Icon} from 'semantic-ui-react';
+import AddAppointment from '../Account/AddAppointment';
 
+import axios from 'axios';
 
+//Add
+
+//Deletes
 import DeleteConsultationLink from './DeleteConsultationLink'
 import DeletePrescriptionLink from './DeletePrescriptionLink';
 import DeleteImageLink from './DeleteImageLink';
@@ -11,15 +16,15 @@ import DeleteChartLink from './DeleteChartLink';
 
 import ViewChartLink from './ViewChartLink';
 
-
 import matthew from '../images/matthew.png';
 
-import axios from 'axios';
 
+//Table variables
 let consultationTable;
 let chartsTable;
 let imagesTable;
 let prescriptionTable;
+let addAppointmentButton;
 
 class PatientProfileLayout extends Component{
 
@@ -129,6 +134,7 @@ class PatientProfileLayout extends Component{
         const {charts} = this.state;
         const {images} = this.state;
         const {prescriptions} = this.state;
+        const {sampleName} = this.props.match.params.id;
 
         consultationTable  = consultations.map(consultation =>{
             
@@ -188,7 +194,7 @@ class PatientProfileLayout extends Component{
         imagesTable = images.map(image => {
             return(
                 
-                    <Card raised>
+                    <Card raised key={image.id}> 
                         <Image src={image.buffer} size="medium"></Image>                        
                         <Card.Content extra>
                             <DeleteImageLink item={image}></DeleteImageLink>
@@ -197,6 +203,7 @@ class PatientProfileLayout extends Component{
                 
             )
         })
+
 
         return(
             <div>
@@ -215,16 +222,13 @@ class PatientProfileLayout extends Component{
 								</Card.Meta>
 							
 								<Card.Description>
-									
+                                    
+                                    <AddAppointment patient={patient}></AddAppointment>
+                                    
+                                    
 								</Card.Description>
 							</Card.Content>
 
-							<Card.Content extra inline>
-								<Container inline>
-								
-									
-								</Container>
-							</Card.Content>
 						</Card>
 					</Grid.Column>
 

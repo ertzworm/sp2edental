@@ -7,8 +7,9 @@ import Signin from './Constants/Signin.js';
 
 
 
-import AccountLayout from './Account/AccountLayout.js';
+//Account
 import AccountProfile from './Account/AccountProfile';
+import DeleteAppointment from './Account/DeleteAppointment';
 
 //Patient Components
 import PatientLayout from './Patient/PatientLayout.js';
@@ -55,15 +56,15 @@ const checkAuth = () => {
     const isAdmin = localStorage.getItem("isAdmin");
     const isVerified = localStorage.getItem("isVerified");
 
-    if (!userName) {
-        alert("No user login found!")
-        localStorage.clear();
-        return false;
-    }else if(isVerified === "false"){
-        alert("User not verified!");
-        localStorage.clear();
-        return false;
-    }
+    // if (!userName) {
+    //     alert("No user login found!")
+    //     localStorage.clear();
+    //     return false;
+    // }else if(isVerified === "false"){
+    //     alert("User not verified!");
+    //     localStorage.clear();
+    //     return false;
+    // }
 
     
     return true;
@@ -131,10 +132,10 @@ class LandingPage extends Component{
                         <AuthRoute path="/tabs/procedures/delete/:id" exact component={DeleteProcedure}></AuthRoute>
 
 
-
-                        <AuthRoute path="/account/" exact component={AccountLayout}></AuthRoute>
+                        {/* Accounts */}
                         <AuthRoute path="/account/profile/" exact component={AccountProfile}></AuthRoute>
-                        <AuthRoute path="/tabs/patients/alec/" exact component={PatientProfileLayout}></AuthRoute>
+                        <AuthRoute path="/account/profile/appointments/delete/:id" exact component={DeleteAppointment}></AuthRoute>
+
 
 
 

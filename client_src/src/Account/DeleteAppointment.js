@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 
-class DeleteChart extends Component{
+class DeleteAppointment extends Component{
 
     constructor(props){
         super(props);
@@ -14,13 +14,13 @@ class DeleteChart extends Component{
             details: '',
         }
 
-        this.getChart = this.getChart.bind(this);
+        this.getAppointment = this.getAppointment.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onDelete = this.onDelete.bind(this);
     }
 
     componentWillMount(){
-        this.getChart();
+        this.getAppointment();
     }
 
     onSubmit(e){
@@ -28,21 +28,17 @@ class DeleteChart extends Component{
     }
 
     onDelete(){
-        let chartId = this.props.match.params.id;
-        axios.delete("http://localhost:3001/api/charts/" +chartId).then(
+        let appointmentId = this.props.match.params.id;
+        axios.delete("http://localhost:3001/api/appointments/" +appointmentId).then(
             reponse => {
-
-                
-                this.props.history.push('/tabs/patients/');
-
-
+                this.props.history.push('/account/profile/');
             }
         )
     }
 
-    getChart(){
-        let chartId = this.props.match.params.id;
-        axios.get("http://localhost:3001/api/charts/" + chartId).then( response =>
+    getAppointment(){
+        let appointmentId = this.props.match.params.id;
+        axios.get("http://localhost:3001/api/appointments/" + appointmentId).then( response =>
             this.setState({ details: response.data }
             )
         )
@@ -54,6 +50,7 @@ class DeleteChart extends Component{
     render(){
 
         const { open, dimmer } = this.state;
+        const {details} = this.state;
 
         return(
             <span>
@@ -63,11 +60,22 @@ class DeleteChart extends Component{
                 <Modal.Content>
                     <Modal.Description>
                     <p>Are you sure you want to delete?</p>
+                    <p>
+                        Date: {this.state.details.date}
+                    </p>
+
+                    <p>
+                        Time: {this.state.details.time}
+                    </p>
+
+                    <p>
+                        With: {this.state.details.lastName}, {this.state.details.firstName}
+                    </p>
                     </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>
                     
-                    <Link to="/tabs/patients" className="ui button negative">Cancel</Link>
+                    <Link to="/account/profile/" className="ui button negative">Cancel</Link>
                     <Button onClick={this.onDelete} positive>Confirm</Button>
                 </Modal.Actions>
             </Modal>
@@ -76,4 +84,4 @@ class DeleteChart extends Component{
     }
 }
 
-export default DeleteChart;
+export default DeleteAppointment;

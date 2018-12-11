@@ -31,6 +31,23 @@ class AddMedicine extends Component{
             url: "http://localhost:3001/api/medicines/",
             data: newMedicine
         }).then(response => {
+
+            const currentDate = new Date();
+            const newLog = {
+                activity: "Added Medicine: " +this.state.brandName,
+                date: currentDate,
+                user: localStorage.userName,
+
+            }
+
+            console.log(newLog);
+            axios.request({
+                method: "post",
+                url: "http://localhost:3001/api/logs/",
+                data: newLog
+            })
+
+
             this.props.history.push("/tabs/medicines")  ;
         })
     }
@@ -60,9 +77,9 @@ class AddMedicine extends Component{
                     <Modal.Description>
                         <Form>
                             <Form.Group widths="equal">
-                                <Form.Input onChange={this.handleChange} value={this.state.genericName} label="Generic Name" name="genericName" type="text" placeholder="Generic Name" ref="genericName"></Form.Input>
-                                <Form.Input onChange={this.handleChange} value={this.state.brandName} label="Brand Name" name="brandName" type="text" placeholder="Brand Name" ref="brandName"></Form.Input>
-                                <Form.Input onChange={this.handleChange} value={this.state.quantity} label="Quantity" name="quantity" type="text" placeholder="Quantity" ref="quantity"></Form.Input>
+                                <Form.Input onChange={this.handleChange} value={this.state.genericName} label="Generic Name" name="genericName" type="text" placeholder="Generic Name"></Form.Input>
+                                <Form.Input onChange={this.handleChange} value={this.state.brandName} label="Brand Name" name="brandName" type="text" placeholder="Brand Name"></Form.Input>
+                                <Form.Input onChange={this.handleChange} value={this.state.quantity} label="Quantity" name="quantity" type="text" placeholder="Quantity"></Form.Input>
                             </Form.Group>
                             
                         </Form>

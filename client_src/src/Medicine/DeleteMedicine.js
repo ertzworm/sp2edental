@@ -32,6 +32,22 @@ class DeleteMedicine extends Component{
         let medicineId = this.props.match.params.id;
         axios.delete("http://localhost:3001/api/medicines/" +medicineId).then(
             reponse => {
+
+                const currentDate = new Date();
+                const newLog = {
+                    activity: "Deleted Medicine: " +this.state.details.brandName,
+                    date: currentDate,
+                    user: localStorage.userName,
+
+                }
+
+                console.log(newLog);
+                axios.request({
+                    method: "post",
+                    url: "http://localhost:3001/api/logs/",
+                    data: newLog
+                })
+                
                 this.props.history.push('/tabs/medicines');
             }
         )
