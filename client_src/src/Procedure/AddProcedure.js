@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Form, Input} from 'semantic-ui-react';
+import {Button, Modal, Form} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -31,6 +31,21 @@ class AddProcedure extends Component{
             url: "http://localhost:3001/api/procedures/",
             data: newProcedure
         }).then(response => {
+            //Add to logs
+            const currentDate = new Date();
+            const newLog = {
+                activity: "Added Procedure: " +this.state.name,
+                date: currentDate,
+                user: localStorage.userName,
+
+            }
+
+            axios.request({
+                method: "post",
+                url: "http://localhost:3001/api/logs/",
+                data: newLog
+            })
+
             this.props.history.push("/tabs/procedures")  ;
         })
     }

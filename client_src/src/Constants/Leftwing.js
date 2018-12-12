@@ -22,8 +22,6 @@ class Leftwing extends Component{
         userName = localStorage.getItem("userName");
         password = localStorage.getItem("password");
 
-        console.log(userName);
-
         axios.get("http://localhost:3001/api/Accounts").then(response => {
             var i=0;
             for(i=0; i<response.data.length; i++){

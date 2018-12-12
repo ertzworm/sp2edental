@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Image, Header} from 'semantic-ui-react';
+import {Button, Modal} from 'semantic-ui-react';
 import {withRouter} from 'react-router-dom';
 
 

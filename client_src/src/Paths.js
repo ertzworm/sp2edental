@@ -24,7 +24,7 @@ import AddConsultation from './Patient/AddConsultation';
 
 //Prescriptions
 import AddPrescription from './Patient/AddPrescription';
-import DeletePrescription from './Patient/DeletePrescriptionLink';
+import DeletePrescription from './Patient/DeletePrescription';
 
 //Charts
 import AddChart from './Patient/AddChart';
@@ -52,19 +52,17 @@ const NotFound = () => <h2>Route not found!</h2>;
 
 const checkAuth = () => {
     const userName = localStorage.getItem("userName");
-    const password = localStorage.getItem("password");
-    const isAdmin = localStorage.getItem("isAdmin");
     const isVerified = localStorage.getItem("isVerified");
 
-    // if (!userName) {
-    //     alert("No user login found!")
-    //     localStorage.clear();
-    //     return false;
-    // }else if(isVerified === "false"){
-    //     alert("User not verified!");
-    //     localStorage.clear();
-    //     return false;
-    // }
+    if (!userName) {
+        alert("No user login found!")
+        localStorage.clear();
+        return false;
+    }else if(isVerified === "false"){
+        alert("User not verified!");
+        localStorage.clear();
+        return false;
+    }
 
     
     return true;

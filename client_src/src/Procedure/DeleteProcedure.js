@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Form, Input} from 'semantic-ui-react';
+import {Button, Modal} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
 import axios from 'axios';
@@ -32,6 +32,20 @@ class DeleteProcedure extends Component{
         let procedureId = this.props.match.params.id;
         axios.delete("http://localhost:3001/api/procedures/" +procedureId).then(
             reponse => {
+                //Add to logs
+                const currentDate = new Date();
+                const newLog = {
+                    activity: "Deleted Procedure: " +this.state.details.name,
+                    date: currentDate,
+                    user: localStorage.userName,
+
+                }
+
+                axios.request({
+                    method: "post",
+                    url: "http://localhost:3001/api/logs/",
+                    data: newLog
+                })
                 this.props.history.push('/tabs/procedures');
             }
         )

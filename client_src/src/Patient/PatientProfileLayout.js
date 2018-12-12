@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Nav from '../Constants/Nav.js';
-import {Header, Container, Image, Card, Grid, Table, Button} from 'semantic-ui-react';
+import {Header, Image, Card, Grid, Table} from 'semantic-ui-react';
 import {Accordion, Icon} from 'semantic-ui-react';
 import AddAppointment from '../Account/AddAppointment';
 
@@ -24,7 +24,6 @@ let consultationTable;
 let chartsTable;
 let imagesTable;
 let prescriptionTable;
-let addAppointmentButton;
 
 class PatientProfileLayout extends Component{
 
@@ -134,7 +133,6 @@ class PatientProfileLayout extends Component{
         const {charts} = this.state;
         const {images} = this.state;
         const {prescriptions} = this.state;
-        const {sampleName} = this.props.match.params.id;
 
         consultationTable  = consultations.map(consultation =>{
             
@@ -186,6 +184,8 @@ class PatientProfileLayout extends Component{
                         <DeletePrescriptionLink item={prescription}>
                             Delete Prescription
                         </DeletePrescriptionLink>
+
+                        {prescription.id}
                     </Table.Cell>
                 </Table.Row>
             )

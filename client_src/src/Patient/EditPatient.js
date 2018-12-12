@@ -58,6 +58,20 @@ class EditPatient extends Component{
             url: "http://localhost:3001/api/patients/" + patientId,
             data: editedPatient
         }).then(response => {
+            //Add to logs
+            const currentDate = new Date();
+            const newLog = {
+                activity: "Edited Patient: " +this.state.lastName,
+                date: currentDate,
+                user: localStorage.userName,
+            }
+
+            axios.request({
+                method: "post",
+                url: "http://localhost:3001/api/logs/",
+                data: newLog
+            })
+
             this.props.history.push("/tabs/patients");
         })
     }

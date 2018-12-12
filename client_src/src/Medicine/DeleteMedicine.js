@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Form, Input} from 'semantic-ui-react';
+import {Button, Modal} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -28,7 +28,6 @@ class DeleteMedicine extends Component{
     }
 
     onDelete(){
-        console.log("Yo shit just got deleted");
         let medicineId = this.props.match.params.id;
         axios.delete("http://localhost:3001/api/medicines/" +medicineId).then(
             reponse => {
@@ -41,7 +40,6 @@ class DeleteMedicine extends Component{
 
                 }
 
-                console.log(newLog);
                 axios.request({
                     method: "post",
                     url: "http://localhost:3001/api/logs/",

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Form, Grid, Header, Message, Segment, Button} from 'semantic-ui-react';
 import Signup from './Signup';
 
-import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 class Signin extends Component{
@@ -35,16 +34,14 @@ class Signin extends Component{
             var i=0;
             for(i=0; i<response.data.length; i++){
                
-                if(userData.email == response.data[i].userName){
+                if(userData.email === response.data[i].userName){
                     
-                    if(userData.password == response.data[i].password){
+                    if(userData.password === response.data[i].password){
                         
                         localStorage.setItem("userName", userData.email);
                         localStorage.setItem("password", userData.password);
                         localStorage.setItem("isAdmin", response.data[i].isAdmin);
                         localStorage.setItem("isVerified", response.data[i].isVerified);
-                        
-
                         this.props.history.push("/tabs/patients");
                     }
                 }

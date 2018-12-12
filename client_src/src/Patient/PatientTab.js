@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Input, Container, Header, Menu, Dropdown, Segment, Table, Pagination} from 'semantic-ui-react';
+import {Input, Container, Header, Menu, Dropdown, Segment, Table} from 'semantic-ui-react';
 import axios from 'axios';
 
 import ViewLink from './ViewLink';
@@ -47,7 +47,6 @@ class PatientTab extends Component{
     getPatients(){
         axios.get(getPatientQuery).then(response =>{
             this.setState({ patients: response.data }, ()=>{
-                console.log(this.state.patients);
             })
         })
     }

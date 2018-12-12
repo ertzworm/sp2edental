@@ -37,11 +37,7 @@ class AddPatient extends Component{
             address: this.state.address,
             contactNumber: this.state.contactNumber
         }
-
-        console.log(newPatient);
-
-      
-        
+              
         axios.request({
             method: "post",
             url: "http://localhost:3001/api/patients/",
@@ -56,7 +52,6 @@ class AddPatient extends Component{
 
             }
 
-            console.log(newLog);
             axios.request({
                 method: "post",
                 url: "http://localhost:3001/api/logs/",

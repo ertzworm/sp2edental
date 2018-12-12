@@ -41,7 +41,7 @@ class AccountProfile extends Component{
     getAppointments(){
         axios.get(getAppointmentsQuery).then(response =>{
             this.setState({ appointments: response.data }, ()=>{
-                console.log(this.state.appointments);
+                
             })
         })
     }
@@ -49,7 +49,7 @@ class AccountProfile extends Component{
     getLogs(){
         axios.get(getLogsQuery).then(response =>{
             this.setState({ logs: response.data }, ()=>{
-                console.log(this.state.logs);
+                
             })
         })
     }

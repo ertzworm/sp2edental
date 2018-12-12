@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Form, Input} from 'semantic-ui-react';
+import {Button, Modal} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -34,6 +34,21 @@ class DeleteImage extends Component{
 
         axios.delete("http://localhost:3001/api/images/" +imageId).then(
             reponse => {
+
+                const currentDate = new Date();
+                const newLog = {
+                    activity: "Deleted image: " +imageId,
+                    date: currentDate,
+                    user: localStorage.userName,
+
+                }
+
+                axios.request({
+                    method: "post",
+                    url: "http://localhost:3001/api/logs/",
+                    data: newLog
+                })
+
                 this.props.history.push('/tabs/patients/view/' +this.state.patientId);
             }
         )

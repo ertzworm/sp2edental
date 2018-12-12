@@ -4,8 +4,6 @@ import {Link} from 'react-router-dom';
 
 import axios from 'axios';
 
-
-
 class EditProcedure extends Component{
 
     constructor(props){
@@ -48,6 +46,20 @@ class EditProcedure extends Component{
             url: "http://localhost:3001/api/procedures/" + procedureId,
             data: editedProcedure
         }).then(response => {
+            //Add to logs
+            const currentDate = new Date();
+            const newLog = {
+                activity: "Edited Procedure: " +this.state.name,
+                date: currentDate,
+                user: localStorage.userName,
+
+            }
+
+            axios.request({
+                method: "post",
+                url: "http://localhost:3001/api/logs/",
+                data: newLog
+            })
             this.props.history.push("/tabs/procedures")  ;
         })
     }

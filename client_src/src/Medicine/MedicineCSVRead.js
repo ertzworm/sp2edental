@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Input} from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -8,20 +8,17 @@ const MedicineCSVRead = () => {
 
     const handleFileRead = (e) => {
         const content = fileReader.result;
-        console.log(content);
+        
 
-        var temp = new Array();
-        var temp2 = new Array();
+        var temp = [];
+        var temp2 = [];
         var parsedMedicine = {};
 
         temp = content.split("\n");
 
-        console.log(temp);
         
         var i=0;
-        var j=0;
 
-        console.log("Parsing the following: ");
         for(i=0; i<temp.length; i++){
             temp2 = temp[i].split(",");
             

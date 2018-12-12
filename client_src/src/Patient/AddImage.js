@@ -25,19 +25,32 @@ class AddImage extends Component {
         
 
         let patientId = this.props.match.params.id;
-        console.log(patientId);
+        
         const editedImage = {
             buffer: this.state.imagePreviewUrl,
             patientId: patientId,
         }
 
-        console.log(editedImage);
+        
 
         axios.request({
             method: "post",
             url: "http://localhost:3001/api/images/",
             data: editedImage
         }).then(response => {
+            const currentDate = new Date();
+            const newLog = {
+                activity: "Added image to patient: " +patientId,
+                date: currentDate,
+                user: localStorage.userName,
+
+            }
+
+            axios.request({
+                method: "post",
+                url: "http://localhost:3001/api/logs/",
+                data: newLog
+            })
             this.props.history.push("/tabs/patients/");
         }).catch(err => console.log(err));
     }

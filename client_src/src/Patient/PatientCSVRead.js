@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Input} from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -8,10 +8,9 @@ const PatientCSVRead = () => {
 
     const handleFileRead = (e) => {
         const content = fileReader.result;
-        console.log(content);
 
-        var temp = new Array();
-        var temp2 = new Array();
+        var temp = [];
+        var temp2 = [];
         var parsedPatient = {};
 
         temp = content.split("\n");
@@ -19,9 +18,7 @@ const PatientCSVRead = () => {
        
         
         var i=0;
-        var j=0;
 
-        console.log("Parsing the following: ");
         for(i=0; i<temp.length; i++){
             temp2 = temp[i].split(",");
             
@@ -37,14 +34,12 @@ const PatientCSVRead = () => {
                 address: temp2[8],
             }
 
-            console.log(parsedPatient);
 
             axios.request({
                 method: "post",
                 url: "http://localhost:3001/api/patients/",
                 data: parsedPatient
             }).then(response => {
-                console.log("Succesful");
             }).catch(err => console.log(err));
         }
 

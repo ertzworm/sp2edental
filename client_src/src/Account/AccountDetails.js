@@ -49,7 +49,7 @@ class AccountDetails extends Component{
             var i=0;
             for(i=0; i<response.data.length; i++){
                 if(userName === response.data[i].userName){
-                    console.log(userName);
+
                     if(password === response.data[i].password){
                         this.setState({
                             id: response.data[i].id,
@@ -97,7 +97,7 @@ class AccountDetails extends Component{
               }
 
               const getId = this.state.id;
-              console.log(getId);
+
 
               axios.request({
                 method: "put",
@@ -106,8 +106,6 @@ class AccountDetails extends Component{
             }).then(response => {
                 this.props.history.push("/tabs/patients");
             })
-
-              console.log(editedAccount);
         }
 
         handleChange(e){

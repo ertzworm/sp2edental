@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Image, Header, Form, Divider} from 'semantic-ui-react';
+import {Button, Modal, Header, Form, Divider} from 'semantic-ui-react';
 import axios from 'axios';
 
 
@@ -39,18 +39,6 @@ class Signup extends Component{
     close = () => this.setState({ open: false })
 
     handleSignup(){
-
-        console.log(this.state.userName);
-        console.log(this.state.password);
-        console.log(this.state.firstName);
-        console.log(this.state.middleName);
-        console.log(this.state.lastName);
-        console.log(this.state.age);
-        console.log(this.state.sex);
-        console.log(this.state.birthDate);
-        console.log(this.state.licenseNumber);
-        console.log(this.state.ptrNumber);
-        console.log(this.state.contactNumber);
 		
 
         const newAccount = {
@@ -78,8 +66,6 @@ class Signup extends Component{
             url: "http://localhost:3001/api/Accounts/",
             data: newAccount
         }).then(response => {
-            console.log(response.data.id);
-
         })
 
         this.close();

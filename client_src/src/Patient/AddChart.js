@@ -80,7 +80,7 @@ class AddChart extends Component{
       onAdd(){
         
         fromPatient = this.props.match.params.id;
-        console.log(fromPatient);
+        
         
         const newChart = {
             upperteeth: this.state.upperteeth,
@@ -89,13 +89,26 @@ class AddChart extends Component{
             patientId: fromPatient
         }
 
-        console.log(newChart);
 
         axios.request({
             method: "post",
             url: "http://localhost:3001/api/charts/" ,
             data: newChart
         }).then(response => {
+            const currentDate = new Date();
+            const newLog = {
+                activity: "Added chart to patient: " +fromPatient,
+                date: currentDate,
+                user: localStorage.userName,
+
+            }
+
+            axios.request({
+                method: "post",
+                url: "http://localhost:3001/api/logs/",
+                data: newLog
+            })
+            
             this.props.history.push("/tabs/patients/");
         })
     }

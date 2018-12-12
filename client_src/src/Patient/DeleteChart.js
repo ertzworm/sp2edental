@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Form, Input} from 'semantic-ui-react';
+import {Button, Modal} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -31,6 +31,20 @@ class DeleteChart extends Component{
         let chartId = this.props.match.params.id;
         axios.delete("http://localhost:3001/api/charts/" +chartId).then(
             reponse => {
+
+                const currentDate = new Date();
+                const newLog = {
+                    activity: "Deleted chart: " +chartId,
+                    date: currentDate,
+                    user: localStorage.userName,
+
+                }
+
+                axios.request({
+                    method: "post",
+                    url: "http://localhost:3001/api/logs/",
+                    data: newLog
+                })
 
                 
                 this.props.history.push('/tabs/patients/');

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Modal, Form, Input} from 'semantic-ui-react';
+import {Button, Modal} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -30,7 +30,20 @@ class DeleteAppointment extends Component{
     onDelete(){
         let appointmentId = this.props.match.params.id;
         axios.delete("http://localhost:3001/api/appointments/" +appointmentId).then(
-            reponse => {
+            response => {
+                const currentDate = new Date();
+                const newLog = {
+                    activity: "Deleted appointment from: " + this.state.details.lastName,
+                    date: currentDate,
+                    user: localStorage.userName,
+
+                }
+
+                axios.request({
+                    method: "post",
+                    url: "http://localhost:3001/api/logs/",
+                    data: newLog
+                })
                 this.props.history.push('/account/profile/');
             }
         )
@@ -50,7 +63,6 @@ class DeleteAppointment extends Component{
     render(){
 
         const { open, dimmer } = this.state;
-        const {details} = this.state;
 
         return(
             <span>

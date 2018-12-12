@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Input, Container, Header, Menu, Dropdown, Segment, Table, Pagination} from 'semantic-ui-react';
+import {Input, Container, Header, Menu, Segment, Table} from 'semantic-ui-react';
 
 
 import AddLink from './AddLink';

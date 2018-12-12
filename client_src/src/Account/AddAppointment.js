@@ -28,14 +28,9 @@ class AddAppointment extends Component{
         this.setState({
             [name]: value
 		});
-		
-		
 	}
 	
 	handleAppointment(){
-		console.log(this.state.date)
-		console.log(this.state.time)
-		console.log(this.props.patient.lastName)
 
 		const newAppointment = {
 			date: this.state.date,
@@ -44,7 +39,6 @@ class AddAppointment extends Component{
 			firstName: this.props.patient.firstName
         }
 
-        console.log(newAppointment);
         
         axios.request({
             method: "post",
@@ -60,7 +54,6 @@ class AddAppointment extends Component{
 
             }
 
-            console.log(newLog);
             axios.request({
                 method: "post",
                 url: "http://localhost:3001/api/logs/",

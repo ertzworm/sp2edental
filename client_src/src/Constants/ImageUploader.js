@@ -10,8 +10,8 @@ class ImageUploader extends React.Component {
     _handleSubmit(e) {
       e.preventDefault();
       // TODO: do something with -> this.state.file
-      console.log('handle uploading-', this.state.file);
-      console.log(this.state.imagePreviewUrl);
+      // console.log('handle uploading-', this.state.file);
+      // console.log(this.state.imagePreviewUrl);
     }
   
     _handleImageChange(e) {
@@ -27,7 +27,7 @@ class ImageUploader extends React.Component {
         })
       }
       reader.readAsDataURL(file)
-      console.log(file.url);
+      //console.log(file.url);
     }
   
     render() {
