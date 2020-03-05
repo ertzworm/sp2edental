@@ -4,6 +4,7 @@
  * @description - Configs for the app are to be stored here
 */
 
+
 module.exports = {
-    DB_URL: "",
+    DB_URL: 'http://localhost:3002/api',
 }

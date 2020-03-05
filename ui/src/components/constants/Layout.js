@@ -2,10 +2,10 @@ import React, {Component} from 'react';
 import {Grid} from 'semantic-ui-react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
-import PatientProfile from '../Patient/PatientProfile';
-import PatientTab from '../Patient/PatientTab.js';
-import MedicineTab from '../Medicine/MedicineTab.js';
-import ProcedureTab from '../Procedure/ProcedureTab.js';
+import PatientProfile from '../patient/PatientProfile';
+import PatientTab from '../patient/PatientTab.js';
+import MedicineTab from '../medicine/MedicineTab.js';
+import ProcedureTab from '../procedure/ProcedureTab.js';
 import AccountTab from '../Account/AccountTab.js';
 import Leftwing from './Leftwing';
 import Nav from './Nav';
