@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 
 //@ MODULES
-import {Form, Grid, Header, Message, Segment, Button} from 'semantic-ui-react';
+import {Form, Grid, Header, Message, Segment, Button, Label} from 'semantic-ui-react';
 import Signup from './Signup';
 
 //@ UTILS
 import api from "../api";
+import {validateEmail} from "../util/validators";
 
 class Signin extends Component{
 
@@ -14,17 +15,20 @@ class Signin extends Component{
         this.state = {
             email: "",
             password: "",
+            hasFormErrors: false,
+            errorMessage: "",
         };
 
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
     
-
     handleLogin = async () => {
         const { email, password } = this.state;
-        let result = api.logIn(email, password);
-        console.log(result);
+
+        if(this.isFormValid(email, password)) {
+            let result = await api.logIn(email, password, this.setState.bind(this))
+        }
     }
 
     handleChange = (event) => {
@@ -34,6 +38,27 @@ class Signin extends Component{
         this.setState({
             [name]: value
         });
+    }
+
+    isFormValid = (email, password) => {
+        if(!(email.trim())) {
+            this.setState({ hasFormErrors: true, errorMessage: "Please fill this out." });
+            return false;
+        }
+
+        if(email && !(validateEmail(email))) {
+            this.setState({ hasFormErrors: true, errorMessage: "Please enter a valid email." });
+            return false;
+        }
+
+        if(!password) {
+            this.setState({ hasFormErrors: true, errorMessage: "Please fill out password."});
+            return false;
+        }
+
+        this.setState({ hasFormErrors: false, errorMessage: ""});
+        return true;
+
     }
 
     render(){
@@ -59,8 +84,8 @@ class Signin extends Component{
 			
                         <Form size="large">
 							<Segment stacked>
+                                {this.state.hasFormErrors && <Label pointing="below" color="red" >{this.state.errorMessage}</Label>}
 								<Form.Input onChange={this.handleChange} value={email} name="email" fluid icon="user" iconPosition="left" placeholder="Email"/>
-                                
 								<Form.Input onChange={this.handleChange} value={password} name="password" fluid icon="lock" iconPosition="left" placeholder="Password" type="password" />
 								<Button onClick={this.handleLogin} color="blue">Sign in</Button>
 							

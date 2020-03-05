@@ -10,21 +10,21 @@
 import axios from 'axios';
 
 //@ UTILS
-const {API_METHODS} = require('./statics');
+const {API_METHODS} = require('./util/statics');
 const config = require('./config');
 
 const api = {
-    logIn: (email, password) => {
+    logIn: (email, password, setState) => {
         return axios({
             method: API_METHODS.POST,
-            url: config.DB_URL + "/login",
+            url: config.DB_URL + '/login',
             data: {email, password}
         })
         .then(result => {
             return result.data;
         })
         .catch(error => {
-            console.log(error);
+            setState({ hasFormErrors: true, errorMessage: "Something went wrong!" });
             throw error;
         })
     }
