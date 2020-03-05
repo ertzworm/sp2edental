@@ -52,15 +52,15 @@ const checkAuth = () => {
     const userName = localStorage.getItem("userName");
     const isVerified = localStorage.getItem("isVerified");
 
-    // if (!userName) {
-    //     alert("No user login found!")
-    //     localStorage.clear();
-    //     return false;
-    // }else if(isVerified === "false"){
-    //     alert("User not verified!");
-    //     localStorage.clear();
-    //     return false;
-    // }    
+    if (!userName) {
+        alert("No user login found!")
+        localStorage.clear();
+        return false;
+    }else if(isVerified === "false"){
+        alert("User not verified!");
+        localStorage.clear();
+        return false;
+    }    
     return true;
   }
 
