@@ -5,7 +5,7 @@ import {Form, Grid, Header, Message, Segment, Button} from 'semantic-ui-react';
 import Signup from './Signup';
 
 //@ UTILS
-const api = require('../api')
+import api from "../api";
 
 class Signin extends Component{
 
@@ -23,6 +23,8 @@ class Signin extends Component{
 
     handleLogin = async () => {
         const { email, password } = this.state;
+        let result = api.logIn(email, password);
+        console.log(result);
     }
 
     handleChange = (event) => {
@@ -35,12 +37,9 @@ class Signin extends Component{
     }
 
     render(){
-
-        console.log(api);
         const {email, password} = this.state;
         const {userToken} = this.state;
         
-
         return(
             <div className="login-form">
                 <style>{`
@@ -60,10 +59,9 @@ class Signin extends Component{
 			
                         <Form size="large">
 							<Segment stacked>
-								<Form.Input onChange={this.handleChange} value={email} name="email" fluid icon="user" iconPosition="left" placeholder="Username" />
-
+								<Form.Input onChange={this.handleChange} value={email} name="email" fluid icon="user" iconPosition="left" placeholder="Email"/>
+                                
 								<Form.Input onChange={this.handleChange} value={password} name="password" fluid icon="lock" iconPosition="left" placeholder="Password" type="password" />
-
 								<Button onClick={this.handleLogin} color="blue">Sign in</Button>
 							
 							</Segment>
