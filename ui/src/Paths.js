@@ -1,19 +1,17 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom';
 
-import Home from './Constants/Home.js';
 
-import Signin from './Constants/Signin.js';
-
-
-
+//@ MODULES
+import Home from './Constants/Home';
+import Signin from './Constants/Signin'
 //Account
 import AccountProfile from './Account/AccountProfile';
 import DeleteAppointment from './Account/DeleteAppointment';
 
 //Patient Components
-import PatientLayout from './Patient/PatientLayout.js';
-import PatientProfileLayout from './Patient/PatientProfileLayout.js';
+import PatientLayout from './Patient/PatientLayout';
+import PatientProfileLayout from './Patient/PatientProfileLayout';
 import AddPatient from './Patient/AddPatient';
 import EditPatient from './Patient/EditPatient';
 import DeletePatient from './Patient/DeletePatient';
@@ -36,13 +34,13 @@ import AddImage from './Patient/AddImage';
 import DeleteImage from './Patient/DeleteImage';
 
 //Medicine Components
-import MedicineLayout from './Medicine/MedicineLayout.js';
+import MedicineLayout from './Medicine/MedicineLayout';
 import AddMedicine from './Medicine/AddMedicine';
 import EditMedicine from './Medicine/EditMedicine';
 import DeleteMedicine from './Medicine/DeleteMedicine';
 
 //Procure Components
-import ProcedureLayout from './Procedure/ProcedureLayout.js';
+import ProcedureLayout from './Procedure/ProcedureLayout';
 import AddProcedure from './Procedure/AddProcedure';
 import EditProcedure from './Procedure/EditProcedure';
 import DeleteProcedure from './Procedure/DeleteProcedure';
@@ -54,17 +52,15 @@ const checkAuth = () => {
     const userName = localStorage.getItem("userName");
     const isVerified = localStorage.getItem("isVerified");
 
-    if (!userName) {
-        alert("No user login found!")
-        localStorage.clear();
-        return false;
-    }else if(isVerified === "false"){
-        alert("User not verified!");
-        localStorage.clear();
-        return false;
-    }
-
-    
+    // if (!userName) {
+    //     alert("No user login found!")
+    //     localStorage.clear();
+    //     return false;
+    // }else if(isVerified === "false"){
+    //     alert("User not verified!");
+    //     localStorage.clear();
+    //     return false;
+    // }    
     return true;
   }
 
@@ -80,14 +76,11 @@ const AuthRoute = ({ component: Component, ...rest }) => (
   )
 
 
-
 class LandingPage extends Component{
     render(){
         return(
             <Router>
-                
                 <Home>
-                    
                     <Switch>
                         <Redirect strict exact from="/" to="/signin/"></Redirect>
                         <Route path="/signin/" exact component={Signin}></Route>
@@ -134,14 +127,8 @@ class LandingPage extends Component{
                         <AuthRoute path="/account/profile/" exact component={AccountProfile}></AuthRoute>
                         <AuthRoute path="/account/profile/appointments/delete/:id" exact component={DeleteAppointment}></AuthRoute>
 
-
-
-
-
                         <Route component={NotFound}></Route>
-                
                     </Switch>
-                    
                 </Home>
             </Router>
         );

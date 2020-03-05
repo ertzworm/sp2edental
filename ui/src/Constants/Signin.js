@@ -1,73 +1,42 @@
 import React, {Component} from 'react';
+
+//@ MODULES
 import {Form, Grid, Header, Message, Segment, Button} from 'semantic-ui-react';
 import Signup from './Signup';
 
-import axios from 'axios';
+//@ UTILS
+const api = require('../api')
 
 class Signin extends Component{
 
     constructor(props){
         super(props);
         this.state = {
-            accessToken: '',
-            email: '',
-            password: '',
-            userToken: '',
-        }
+            email: "",
+            password: "",
+        };
 
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
     
 
-    handleLogin(){
-        
-
-        const userData = {
-            email: this.state.email,
-            password: this.state.password
-        }
-
-        //Get User
-        axios.get("http://localhost:3001/api/Accounts").then(response => {
-           
-            var i=0;
-            for(i=0; i<response.data.length; i++){
-               
-                if(userData.email === response.data[i].userName){
-                    
-                    if(userData.password === response.data[i].password){
-                        
-                        localStorage.setItem("userName", userData.email);
-                        localStorage.setItem("password", userData.password);
-                        localStorage.setItem("isAdmin", response.data[i].isAdmin);
-                        localStorage.setItem("isVerified", response.data[i].isVerified);
-                        this.props.history.push("/tabs/patients");
-                    }
-                }
-            }
-            
-            
-        })
-
+    handleLogin = async () => {
+        const { email, password } = this.state;
     }
 
-
-
-    handleChange(e){
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
+    handleChange = (event) => {
+        const { target } = event;
+        const {value, name} = target
 
         this.setState({
             [name]: value
         });
     }
 
-
-
     render(){
 
+        console.log(api);
         const {email, password} = this.state;
         const {userToken} = this.state;
         
@@ -81,13 +50,12 @@ class Signin extends Component{
                         height: 100%
                     }
                 `}
-
                 </style>
 
                 <Grid textAlign="center" style={{height:'100%'}} verticalAlign="middle">
                     <Grid.Column style={{ maxWidth:450 }}>
                         <Header as="h2" color="teal" textAlign="center">
-                           Welcome to eDental! {userToken.ttl}
+                           Welcome to eDental! {userToken}
                         </Header>
 			
                         <Form size="large">
@@ -106,8 +74,6 @@ class Signin extends Component{
 						</Message>
                     </Grid.Column>
                 </Grid>
-
-            
             </div>
         );
     }
