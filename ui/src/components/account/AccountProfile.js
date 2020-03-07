@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Grid, Accordion, Icon, Table} from 'semantic-ui-react';
 import axios from 'axios';
 
-import Nav from '../Constants/Nav';
-import Leftwing from '../Constants/Leftwing';
+import Nav from '../constants/Nav';
+import Leftwing from '../constants/Leftwing';
 import AccountDetails from './AccountDetails';
 import DeleteAppointmentLink from './DeleteAppointmentLink';
 
