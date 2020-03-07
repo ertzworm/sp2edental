@@ -4,11 +4,14 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^8.2.0",
     "history": "^4.7.2",
+    "moment": "^2.24.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "react-semantic-ui-datepickers": "^2.3.0",
     "semantic-ui-react": "^0.83.0"
   },
   "scripts": {

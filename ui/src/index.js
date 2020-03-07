@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LandingPage from './Paths.js';
+import LandingPage from './Paths';
 
 
 import * as serviceWorker from './serviceWorker';
+
+const env = require('dotenv');
+env.config();
 
 ReactDOM.render(<LandingPage />, document.getElementById('root'));
 
