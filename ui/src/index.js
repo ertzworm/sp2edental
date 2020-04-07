@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRoutes from './Paths';
-
-
 import * as serviceWorker from './serviceWorker';
 
+
+//@ For squashing
 const env = require('dotenv');
 env.config();
 
